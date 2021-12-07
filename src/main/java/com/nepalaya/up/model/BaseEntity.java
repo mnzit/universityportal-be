@@ -22,7 +22,7 @@ import java.util.Date;
 @AllArgsConstructor
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity<T extends User> implements Serializable {
+public abstract class BaseEntity<T extends User> implements Serializable {
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -50,8 +50,6 @@ public class BaseEntity<T extends User> implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private T modifiedBy;
 
-    @JsonIgnore
-    @org.hibernate.annotations.Generated(GenerationTime.INSERT)
     @Column(name = "STATUS", nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean status;
 }
