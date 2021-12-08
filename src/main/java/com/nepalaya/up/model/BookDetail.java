@@ -1,14 +1,14 @@
 package com.nepalaya.up.model;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "BOOK_DETAILS")
@@ -42,5 +42,9 @@ public class BookDetail extends BaseEntity<User> {
     @Size(min = 2, max = 150)
     @Column(name = "ISBN", nullable = false)
     private Long isbn;
+
+    @OneToMany(mappedBy = "bookDetail", fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Book> books;
 
 }

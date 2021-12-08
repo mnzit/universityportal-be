@@ -22,7 +22,7 @@ import java.util.Date;
 @AllArgsConstructor
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseEntity<T extends User> implements Serializable {
+public class BaseEntity<T extends User> implements Serializable {
 
     @Id
     @Column(name = "ID", nullable = false)
