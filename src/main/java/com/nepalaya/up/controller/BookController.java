@@ -14,7 +14,6 @@ public class BookController {
 
     private final BookDetailRepository bookDetailRepository;
 
-
     public BookController(BookDetailRepository bookDetailRepository) {
         this.bookDetailRepository = bookDetailRepository;
     }

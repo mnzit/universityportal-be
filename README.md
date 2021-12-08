@@ -31,7 +31,7 @@
 1. Course and Subject
 ### GradeMgmt
 1. Managed by teachers
-2. Student can viwe their grade based on subjects
+2. Student can view their grade based on subjects
 ### AttendanceMgmt
 1. Will contain EmailFeature for each attendance done or missed
 2. Will generate Attendance report
