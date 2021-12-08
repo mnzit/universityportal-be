@@ -36,5 +36,5 @@ public class Subject extends BaseEntity<User> {
     @NotBlank
     @Size(min = 2, max = 150)
     @Column(name = "CREDIT_HOURS", nullable = false)
-    private Long credit_hours;
+    private Long creditHour;
 }
