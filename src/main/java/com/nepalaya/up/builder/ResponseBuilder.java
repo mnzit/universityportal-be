@@ -11,7 +11,7 @@ public class ResponseBuilder {
                 .success(true)
                 .message(message)
                 .data(object)
-                .build();
+                .build()
     }
 
     public static Response success(String message) {
