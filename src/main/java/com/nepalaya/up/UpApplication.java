@@ -30,7 +30,7 @@ public class UpApplication {
 			user.setEmailAddress("anitajoc@gmail.com");
 			user.setPassword("password1");
 			userRepository.save(user);
-			Thread.sleep(10000);
+			Thread.sleep(10000)
 			user.setFirstName("Anitas");
 			userRepository.save(user);
 		};

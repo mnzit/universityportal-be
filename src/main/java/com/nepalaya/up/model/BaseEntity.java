@@ -29,27 +29,31 @@ public abstract class BaseEntity<T extends User> implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Basic(optional = true)
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED_DATE", updatable = false)
     private Date createdDate;
 
-
+    @Basic(optional = true)
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "MODIFIED_DATE",insertable = false)
     private Date modifiedDate;
 
+    @Basic(optional = true)
     @CreatedBy
     @JoinColumn(name = "CREATED_BY", referencedColumnName = "ID", updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private T createdBy;
 
+    @Basic(optional = true)
     @LastModifiedBy
     @JoinColumn(name = "MODIFIED_BY", referencedColumnName = "ID", insertable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private T modifiedBy;
 
+    @Basic(optional = true)
     @Column(name = "STATUS", nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean status;
 }

@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "BOOKS")
+@Table(name = "BOOK_DETAILS")
 @Builder
 @Getter
 @Setter
