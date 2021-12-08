@@ -56,8 +56,8 @@
 
 ### Tables
 
-1. Users
-![image](https://user-images.githubusercontent.com/21164124/145242624-b399cf94-bb6a-4bb3-b2f9-c0d4c643ce0f.png)
+1. User
+[User](https://user-images.githubusercontent.com/21164124/145242907-47aa0cb3-2cc5-48ee-b890-99a3466e330c.png)
 
 3. Roles
 4. Authorities
