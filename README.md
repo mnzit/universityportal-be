@@ -1,5 +1,14 @@
 # UniversityPortal
 
+## Stack
+1. Java (Spring Boot)
+2. JavaScript (Angular)
+5. MySQL - Local
+6. PostGres - Production
+7. Minio
+8. Tomcat Server
+10. Heroku
+
 ## Plan
 1. LibraryMgmt
 2. CourseMgmt
@@ -11,13 +20,20 @@
 
 
 ### LibraryMgmt
+1. Book History Mgmt
 ### CourseMgmt
+1. Course and Subject
 ### GradeMgmt
+1. Managed by teachers
+2. Student can viwe their grade based on subjects
 ### AttendanceMgmt
+1. Will contain EmailFeature for each attendance done or missed
+2. Will generate Attendance report
+3. Will have features to take leaves.
 ### UserMgmt
-### StudentPerformanceMetrics
+1. Email to User after account creation
 ### NoticeMgmt
-
+1. Will have functionality to post any notice (Holiday, Assignment)
 
 ### Entities
 
