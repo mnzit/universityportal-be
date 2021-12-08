@@ -13,7 +13,7 @@ import java.util.Optional;
 @EnableJpaAuditing
 public class AuditingConfig {
 
-    private final UserRepository userRepository
+    private final UserRepository userRepository;
 
     public AuditingConfig(UserRepository userRepository) {
         this.userRepository = userRepository;

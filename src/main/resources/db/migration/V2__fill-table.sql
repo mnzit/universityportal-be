@@ -1,0 +1,2 @@
+INSERT INTO users(firstname, middlename, lastname, gender, address, contact_no, email_address, password)
+VALUES ('admin', 'admin', 'admin', 'MALE', 'Nepal', '980XXXXXXX', 'admin@gmail.com', 'adminadmin');
