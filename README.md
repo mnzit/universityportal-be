@@ -21,14 +21,14 @@
 
 ### Entities
 
-1. User
+1. [User](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/User.java)
 3. Role
 4. Authority
-5. BookDetail
-6. Book
+5. [BookDetail](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/BookDetail.java)
+6. [Book](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Book.java)
 7. BookHistory
-8. Course
-9. Subject
+8. [Course](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Course.java)
+9. [Subject](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Subject.java)
 10. CourseSubject
 11. Program
 12. Attendance
