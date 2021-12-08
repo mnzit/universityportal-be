@@ -37,38 +37,24 @@
 
 ### Entities
 
-1. [User](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/User.java)
-3. Role
-4. Authority
-5. [BookDetail](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/BookDetail.java)
-6. [Book](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Book.java)
-7. BookHistory
-8. [Course](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Course.java)
-9. [Subject](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Subject.java)
-10. CourseSubject
-11. Program
-12. Attendance
-13. Holiday
-14. Post
-15. Comment
-16. PostComment
-17. File
+* [User](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/User.java)
+* Role
+* Authority
+* [BookDetail](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/BookDetail.java)
+* [Book](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Book.java)
+* BookHistory
+* [Course](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Course.java)
+* [Subject](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Subject.java)
+* CourseSubject
+* Program
+* Attendance
+* Holiday
+* Post
+* Comment
+* PostComment
+* File
 
 ### Tables
 
-1.[User](https://user-images.githubusercontent.com/21164124/145242907-47aa0cb3-2cc5-48ee-b890-99a3466e330c.png)
-2. Roles
-3. Authorities
-4. BookDetails
-5. Books
-6. BookHistories
-7. Courses
-8. Subjects
-9. CourseSubjects
-10. Programs
-11. Attendances
-12. Holidays
-13. Posts
-14. Comments
-15. PostComments
-16. Files
+* [User](https://user-images.githubusercontent.com/21164124/145242907-47aa0cb3-2cc5-48ee-b890-99a3466e330c.png)
+
