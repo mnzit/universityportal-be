@@ -1,5 +1,11 @@
 # UniversityPortal
 
+## FYI
+* Class Name - PascalCase
+* Normal Variable Name - CamelCase
+* Table Name - UpperSnakeCase
+* Final Variable Name - UpperSnakeCase
+
 ## Stack
 1. Java (Spring Boot)
 2. JavaScript (Angular)
