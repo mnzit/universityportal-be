@@ -35,7 +35,7 @@ public class Course extends BaseEntity<User> {
     @NotBlank
     @Size(min = 2, max = 150)
     @Column(name = "DURATION", nullable = false)
-    private Date duration;
+    private String duration;
 
 
 
