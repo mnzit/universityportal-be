@@ -56,5 +56,9 @@
 
 ### Tables
 
-* [User](https://user-images.githubusercontent.com/21164124/145242907-47aa0cb3-2cc5-48ee-b890-99a3466e330c.png)
+* [Users](https://user-images.githubusercontent.com/21164124/145242907-47aa0cb3-2cc5-48ee-b890-99a3466e330c.png)
+* [BookDetails](https://user-images.githubusercontent.com/21164124/145244331-9ab7f7e1-02bb-4c75-9941-176d7ceae7ca.png)
+* [Books](https://user-images.githubusercontent.com/21164124/145244460-8502f0ac-fa30-4785-9503-3a284e0bd654.png)
+
+
 
