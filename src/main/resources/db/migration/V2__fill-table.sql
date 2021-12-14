@@ -4,3 +4,5 @@ VALUES ('admin', 'admin', 'admin', 'MALE', 'Nepal', '980XXXXXXX', 'admin@gmail.c
 INSERT INTO book_details(author,title,isbn,published_date) VALUES("J.K Rowling","Harry Potter", "123123123","2021-09-11");
 insert into books(book_detail_id) values(1);
 insert into books(book_detail_id) values(1);
+
+INSERT INTO book_record(book_id,user_id,book_taken_date,book_returned_date) VALUES(1,1, "2021-09-16","2021-09-19");
