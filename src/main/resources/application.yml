@@ -9,8 +9,8 @@ spring:
     enabled: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: Root@12345
+    username: sapana
+    password: sapana
     url: jdbc:mysql://localhost:3306/UNIVERSITY_PORTAL?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
   jpa:
     database: mysql
@@ -18,7 +18,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate.format_sql: true
 

@@ -60,7 +60,7 @@ public class User extends BaseEntity<User> {
 
     @Basic(optional = true)
     @NotBlank
-    @Column(name = "PASSWORD", nullable = false)
+    @Column(name = "PASSSWORD", nullable = false)
     @Size(min = 8, max = 100)
     private String password;
 
