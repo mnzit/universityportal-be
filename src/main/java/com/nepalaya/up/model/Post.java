@@ -11,17 +11,17 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "COURSES")
+@Table(name = "POSTS")
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Course extends BaseEntity<User> {
+public class Post extends BaseEntity<User> {
 
     @Basic(optional = true)
     @NotBlank
-    @Size(min = 2, max = 150)
+    @Size(min = 2, max = 250)
     @Column(name = "TITLE", nullable = false)
     private String title;
 
@@ -31,14 +31,12 @@ public class Course extends BaseEntity<User> {
     @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
-    @Basic(optional = true)
-    @NotBlank
-    @Size(min = 2, max = 150)
-    @Column(name = "DURATION", nullable = false)
-    private String duration;
-
-    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
-    private List<CourseSubject> subjects;
+    private List<PostComments> comments;
+
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<PostFiles> files;
 
 }
