@@ -56,4 +56,8 @@ public class BaseEntity<T extends User> implements Serializable {
     @Basic(optional = true)
     @Column(name = "STATUS", nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean status;
+
+    public BaseEntity(Long id) {
+        this.id = id;
+    }
 }

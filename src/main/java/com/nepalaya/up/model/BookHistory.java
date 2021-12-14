@@ -1,6 +1,5 @@
 package com.nepalaya.up.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,29 +8,27 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "BOOK_RECORD")
+@Table(name = "BOOK_HISTORIES")
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookRecord extends BaseEntity<User> {
+public class BookHistory extends BaseEntity<User> {
 
-//    @JsonBackReference
     @NotBlank
     @Size(min = 2, max = 150)
     @OneToOne
     @Basic(optional = false)
     @JoinColumn(name = "BOOK_ID", referencedColumnName = "ID")
-    private Book bookId;
+    private Book book;
 
-//    @JsonBackReference
     @NotBlank
     @Size(min = 2, max = 150)
     @OneToOne
     @Basic(optional = false)
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
-    private User userId;
+    private User user;
 
     @Basic(optional = true)
     @NotBlank
@@ -45,4 +42,7 @@ public class BookRecord extends BaseEntity<User> {
     @Column(name = "BOOK_RETURNED_DATE", nullable = false)
     private Date bookReturnedDate;
 
+    public BookHistory(Long id) {
+        super(id);
+    }
 }
