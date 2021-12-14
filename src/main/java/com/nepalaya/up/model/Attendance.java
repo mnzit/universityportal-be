@@ -6,10 +6,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.Timer;
 
-    @Entity
+@Entity
     @Table(name = "ATTENDANCES")
     @Builder
     @Getter
@@ -37,6 +35,6 @@ import java.util.Timer;
         @Basic(optional = true)
         @Column(name = "STATE", columnDefinition = "enum('PRESENT','ABSENT', 'SICK', 'LEAVE') DEFAULT 'PRESENT'")
         @Enumerated(EnumType.STRING)
-        private BookStatus state;
+        private AttendanceState state;
     }
 
