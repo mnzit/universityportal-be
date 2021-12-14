@@ -16,19 +16,15 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class File extends BaseEntity<User> {
 
-    @JsonBackReference
     @NotBlank
     @Size(min = 2, max = 150)
-    @ManyToOne
-    @Basic(optional = false)
-    @JoinColumn(name = "OBJECT_ID", referencedColumnName = "ID")
+    @Column(name = "OBJECT_ID")
     private String objectId;
 
     @Basic(optional = true)
     @Column(name = "TYPE", columnDefinition = "enum('ZIP','RAR', 'DOCX', 'DOC', 'PDF','PNG','JPG','JPEG','GIF','PPTX','PPT')")
     @Enumerated(EnumType.STRING)
     private FileType type;
-
 
     public File(Long id) {
         super(id);
