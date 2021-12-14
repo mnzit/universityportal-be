@@ -23,7 +23,5 @@ public class BookController {
         List<BookDetail> all = bookDetailRepository.findAll();
         System.out.println(all.get(0).getBooks().size());
         return bookDetailRepository.findAll();
-        // Sapana Task
-        // Create a BookDetail -> Service Layer
     }
 }
