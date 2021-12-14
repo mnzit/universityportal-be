@@ -7,38 +7,27 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "COURSES")
+@Table(name = "POST_COMMENTS")
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Course extends BaseEntity<User> {
+public class PostComments extends BaseEntity<User> {
 
     @Basic(optional = true)
     @NotBlank
     @Size(min = 2, max = 150)
-    @Column(name = "TITLE", nullable = false)
-    private String title;
+    @ManyToOne
+    @JoinColumn(name = "POST_ID", referencedColumnName = "ID")
+    private Post post;
 
     @Basic(optional = true)
     @NotBlank
     @Size(min = 2, max = 1000)
     @Column(name = "DESCRIPTION", nullable = false)
     private String description;
-
-    @Basic(optional = true)
-    @NotBlank
-    @Size(min = 2, max = 150)
-    @Column(name = "DURATION", nullable = false)
-    private String duration;
-
-    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SUBSELECT)
-    private List<CourseSubject> subjects;
-
 }

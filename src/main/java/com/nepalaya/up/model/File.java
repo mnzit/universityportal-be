@@ -8,29 +8,29 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "BOOKS")
+@Table(name = "FILES")
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book extends BaseEntity<User> {
+public class File extends BaseEntity<User> {
 
     @JsonBackReference
     @NotBlank
     @Size(min = 2, max = 150)
     @ManyToOne
     @Basic(optional = false)
-    @JoinColumn(name = "BOOK_DETAIL_ID", referencedColumnName = "ID")
-    private BookDetail bookDetail;
+    @JoinColumn(name = "OBJECT_ID", referencedColumnName = "ID")
+    private String objectId;
 
     @Basic(optional = true)
-    @Column(name = "STATE", columnDefinition = "enum('TAKEN','STOLEN', 'AVAILABLE', 'DAMAGED', 'LOST') DEFAULT 'AVAILABLE'")
+    @Column(name = "TYPE", columnDefinition = "enum('ZIP','RAR', 'DOCX', 'DOC', 'PDF','PNG','JPG','JPEG','GIF','PPTX','PPT')")
     @Enumerated(EnumType.STRING)
-    private BookStatus state;
+    private FileType type;
 
 
-    public Book(Long id) {
+    public File(Long id) {
         super(id);
     }
 }
