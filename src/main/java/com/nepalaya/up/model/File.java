@@ -16,12 +16,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class File extends BaseEntity<User> {
 
-    @JsonBackReference
     @NotBlank
     @Size(min = 2, max = 150)
-    @ManyToOne
-    @Basic(optional = false)
-    @JoinColumn(name = "OBJECT_ID", referencedColumnName = "ID")
+
+    @Column(name = "OBJECT_ID")
     private String objectId;
 
     @Basic(optional = true)
