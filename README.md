@@ -65,7 +65,7 @@
 * [Holiday](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Holiday.java)
 * [Post](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Post.java)
 * [CourseSubject](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/CourseSubject.java)
-* [PostComment](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/PostComments.java)
+* [PostComment](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/PostComment.java)
 * [File](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/File.java)
 
 ### Tables
