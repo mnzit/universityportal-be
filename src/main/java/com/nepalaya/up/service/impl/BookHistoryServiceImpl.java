@@ -1,9 +1,10 @@
-package com.nepalaya.up.service;
+package com.nepalaya.up.service.impl;
 
 import com.nepalaya.up.model.Book;
 import com.nepalaya.up.model.BookHistory;
 import com.nepalaya.up.repository.BookHistoryRepository;
 import com.nepalaya.up.response.BookHistoryResponse;
+import com.nepalaya.up.service.BookHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class BookHistoryServiceImpl implements BookHistoryService{
+public class BookHistoryServiceImpl implements BookHistoryService {
 
     @Autowired
     private BookHistoryRepository bookHistoryRepository;
