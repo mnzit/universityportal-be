@@ -1,28 +1,25 @@
 package com.nepalaya.up.controller;
 
-import com.nepalaya.up.model.Role;
-import com.nepalaya.up.repository.RoleRepository;
+import com.nepalaya.up.dto.Response;
+import com.nepalaya.up.service.RoleService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("roles")
 public class RoleController {
 
-    private final RoleRepository roleRepository;
+    private final RoleService roleService;
 
-    public RoleController(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
+    public RoleController(RoleService roleService) {
+        this.roleService = roleService;
     }
 
     @GetMapping("{id}")
-    public Role role(@PathVariable("id") Long id){
-        Optional<Role> role = roleRepository.findById(id);
-        return role.get();
+    public Response role(@PathVariable("id") Long id){
+        return roleService.getRoleById(id);
     }
 
 }
