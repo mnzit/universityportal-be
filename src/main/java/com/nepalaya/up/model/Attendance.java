@@ -16,7 +16,7 @@ import java.util.logging.Filter;
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    class Attendance extends BaseEntity<User> {
+public class Attendance extends BaseEntity<User> {
 
         @JsonBackReference
         @NotBlank
