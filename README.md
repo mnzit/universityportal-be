@@ -51,8 +51,9 @@
 ### Entities
 
 * [User](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/User.java)
-* Role
-* Authority
+* [Role](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Role.java)
+* [Authority](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Authority.java)
+* [RoleAuthority](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/RoleAuthority.java)
 * [BookDetail](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/BookDetail.java)
 * [Book](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Book.java)
 * [BookHistory](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/BookHistory.java)
