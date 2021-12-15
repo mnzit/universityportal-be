@@ -58,7 +58,7 @@
 * BookHistory
 * [Course](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Course.java)
 * [Subject](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Subject.java)
-* CourseSubject
+* [CourseSubject](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/CourseSubject.java)
 * Program
 * Attendance
 * Holiday
