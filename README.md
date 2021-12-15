@@ -58,6 +58,7 @@
 * [BookHistory](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/BookHistory.java)
 * [Course](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Course.java)
 * [Subject](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Subject.java)
+* [CourseSubject](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/CourseSubject.java)
 * [Program](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Program.java)
 * [Attendance](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Attendance.java)
 * [Holiday](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Holiday.java)
