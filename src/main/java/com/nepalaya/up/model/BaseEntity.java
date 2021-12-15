@@ -25,11 +25,13 @@ import java.util.Date;
 public class BaseEntity<T extends User> implements Serializable {
 
     @Id
+    @JsonIgnore
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Basic(optional = true)
+    @JsonIgnore
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED_DATE", updatable = false)
@@ -37,23 +39,27 @@ public class BaseEntity<T extends User> implements Serializable {
 
     @Basic(optional = true)
     @LastModifiedDate
+    @JsonIgnore
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "MODIFIED_DATE",insertable = false)
     private Date modifiedDate;
 
     @Basic(optional = true)
     @CreatedBy
+    @JsonIgnore
     @JoinColumn(name = "CREATED_BY", referencedColumnName = "ID", updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private T createdBy;
 
     @Basic(optional = true)
     @LastModifiedBy
+    @JsonIgnore
     @JoinColumn(name = "MODIFIED_BY", referencedColumnName = "ID", insertable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private T modifiedBy;
 
     @Basic(optional = true)
+    @JsonIgnore
     @Column(name = "STATUS", nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean status;
 

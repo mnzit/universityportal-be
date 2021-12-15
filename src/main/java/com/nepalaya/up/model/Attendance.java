@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.swing.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.logging.Filter;
 
 @Entity
 @Table(name = "ATTENDANCES")
@@ -16,7 +14,7 @@ import java.util.logging.Filter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-class Attendance extends BaseEntity<User> {
+public class Attendance extends BaseEntity<User> {
 
     @JsonBackReference
     @NotBlank
@@ -39,4 +37,3 @@ class Attendance extends BaseEntity<User> {
     @Enumerated(EnumType.STRING)
     private AttendanceState state;
 }
-

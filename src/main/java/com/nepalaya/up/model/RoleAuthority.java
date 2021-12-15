@@ -1,9 +1,10 @@
 package com.nepalaya.up.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "ROLE_AUTHORITIES")
@@ -14,16 +15,13 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class RoleAuthority extends BaseEntity<User> {
 
-    @Basic(optional = true)
-    @NotBlank
-    @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Role.class)
     private Role role;
 
-    @Basic(optional = true)
-    @NotBlank
-    @ManyToOne
     @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Authority.class)
     private Authority authority;
 
 }

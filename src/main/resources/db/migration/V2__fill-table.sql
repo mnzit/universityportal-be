@@ -20,4 +20,8 @@ insert into attendances(program_id,user_id,state) values(1,1,'PRESENT');
 
 INSERT INTO course_subjects(course_id,subject_id) VALUES (1,1);
 
-INSERT INTO roles(name) VALUES('SUPER_ADMIN'),('ADMIN'),('STAFF'),('INSTRUCTOR'),('LIBRARIAN');
+INSERT INTO roles(name) VALUES('SUPER_ADMIN'),('ADMIN'),('STAFF'),('INSTRUCTOR'),('LIBRARIAN'),('STUDENT');
+
+INSERT INTO authorities(name) VALUES ('ADD_USER'),('VIEW_USER'),('UPDATE_USER'),('DELETE_USER');
+
+INSERT INTO role_authorities(role_id, authority_id) VALUES(1, 1),(1, 2),(1, 3),(1, 4);

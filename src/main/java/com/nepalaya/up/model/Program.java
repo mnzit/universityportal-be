@@ -16,7 +16,7 @@ import java.util.Timer;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-class Program extends BaseEntity<User> {
+public class Program extends BaseEntity<User> {
 
     @Basic(optional = true)
     @NotBlank
