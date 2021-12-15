@@ -16,11 +16,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostComments extends BaseEntity<User> {
+public class PostComment extends BaseEntity<User> {
 
     @Basic(optional = true)
     @NotBlank
-    @Size(min = 2, max = 150)
     @ManyToOne
     @JoinColumn(name = "POST_ID", referencedColumnName = "ID")
     private Post post;

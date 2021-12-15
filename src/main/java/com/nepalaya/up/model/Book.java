@@ -27,7 +27,7 @@ public class Book extends BaseEntity<User> {
     @Basic(optional = true)
     @Column(name = "STATE", columnDefinition = "enum('TAKEN','STOLEN', 'AVAILABLE', 'DAMAGED', 'LOST') DEFAULT 'AVAILABLE'")
     @Enumerated(EnumType.STRING)
-    private BookStatus state;
+    private BookState state;
 
 
     public Book(Long id) {

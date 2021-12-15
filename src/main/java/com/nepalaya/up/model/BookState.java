@@ -1,6 +1,6 @@
 package com.nepalaya.up.model;
 
-public enum BookStatus {
+public enum BookState {
     AVAILABLE,
     TAKEN,
     DAMAGED,

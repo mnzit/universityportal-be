@@ -7,7 +7,6 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -33,7 +32,7 @@ public class Post extends BaseEntity<User> {
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
-    private List<PostComments> comments;
+    private List<PostComment> comments;
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)

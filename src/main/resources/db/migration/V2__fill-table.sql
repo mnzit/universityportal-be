@@ -1,5 +1,5 @@
 INSERT INTO users(firstname, middlename, lastname, gender, address, contact_no, email_address, password)
-VALUES ('admin', 'admin', 'admin', 'MALE', 'Nepal', '980XXXXXXX', 'admin@gmail.com', 'adminadmin');
+VALUES ('admin', 'admin', 'admin', 'MALE', 'Nepal', '9801111111', 'admin@gmail.com', 'admin');
 
 INSERT INTO book_details(author, title, isbn, published_date)
 VALUES ('J.K Rowling', 'Harry Potter', '123123123', '2021-09-11');
@@ -19,3 +19,5 @@ INSERT INTO programs(year,month,course_id) VALUES (2021,07,1);
 insert into attendances(program_id,user_id,state) values(1,1,'PRESENT');
 
 INSERT INTO course_subjects(course_id,subject_id) VALUES (1,1);
+
+INSERT INTO roles(name) VALUES('SUPER_ADMIN'),('ADMIN'),('STAFF'),('INSTRUCTOR'),('LIBRARIAN');
