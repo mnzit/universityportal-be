@@ -3,48 +3,48 @@ package com.nepalaya.up.util;
 import com.nepalaya.up.model.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Component
 public class JwtUtil {
 
-    public static String generateToken(UserDetails userDetails){
+    @Value("${jwt.expiresInMinute}")
+    private Long expiresInMinute;
+
+    @Value("${jwt.secretKey}")
+    private String secretKey;
+
+    public  String generateToken(UserDetails userDetails) {
         User user = (User) userDetails;
         Date issueDate = new Date();
-        Date expiryDate = new Date(issueDate.getTime()+600000);
-        String secretKey = "mbA7W_&3Gg'a'{.Z!@4724:%=rF.YjuA";
+        Date expiryDate = new Date(issueDate.getTime() + expiresInMinute * 60 * 1000);
 
         Map<String, Object> claims = new HashMap<>();
+        claims.put("id", user.getId());
+        claims.put("status",user.getStatus());
         claims.put("role", user.getRole().getName());
         claims.put("authorities", user
-                .getRole()
-                .getRoleAuthorities()
-                .stream()
-                .map(
-                        roleAuthority -> roleAuthority
-                                .getAuthority()
-                                .getName()
-                ).collect(Collectors.joining(","))
+                        .getRole()
+                        .getRoleAuthorities()
+                        .stream()
+                        .map(roleAuthority -> roleAuthority.getAuthority().getName())
+                        .collect(Collectors.joining(","))
         );
+
         return Jwts
                 .builder()
-                .setSubject(
-                        new StringBuilder()
-                                .append(user.getFirstName())
-                                .append(" ")
-                                .append(user.getLastName())
-                                .toString()
-                )
+                .setSubject(user.getFullName())
                 .setClaims(claims)
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
-
-
     }
 }

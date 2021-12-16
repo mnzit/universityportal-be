@@ -83,4 +83,20 @@ public class User extends BaseEntity<User> implements UserDetails {
     public boolean isEnabled() {
         return getStatus();
     }
+
+    public String getFullName(){
+        StringBuilder fullName = new StringBuilder();
+        if(firstName != null){
+            fullName.append(firstName);
+            fullName.append(" ");
+        }
+        if(middleName != null){
+            fullName.append(middleName);
+            fullName.append(" ");
+        }
+        if(lastName != null){
+            fullName.append(lastName);
+        }
+        return fullName.toString();
+    }
 }

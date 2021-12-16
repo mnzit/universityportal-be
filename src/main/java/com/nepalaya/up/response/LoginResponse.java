@@ -14,8 +14,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class LoginResponse implements Serializable {
 
-    private String name;
-    private String email;
     @JsonIgnore
     private String token;
 }
