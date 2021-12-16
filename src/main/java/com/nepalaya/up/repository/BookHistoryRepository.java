@@ -12,5 +12,4 @@ import java.util.List;
 public interface BookHistoryRepository extends JpaRepository<BookHistory, Long> {
 
     List<BookHistory> findBookHistoriesByBook(Book book);
-
 }

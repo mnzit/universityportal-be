@@ -1,5 +1,6 @@
 package com.nepalaya.up.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nepalaya.up.model.enums.GenderType;
 import lombok.*;
 
@@ -30,12 +31,15 @@ public class User extends BaseEntity<User> {
     @Column(length = 150, name = "ADDRESS", nullable = false)
     private String address;
 
+    @JsonIgnore
     @Column(length = 10, name = "CONTACT_NO", nullable = false)
     private String contactNo;
 
+    @JsonIgnore
     @Column(length = 150, name = "EMAIL_ADDRESS", nullable = false)
     private String emailAddress;
 
+    @JsonIgnore
     @Column(length = 150, name = "PASSWORD", nullable = false)
     private String password;
 
