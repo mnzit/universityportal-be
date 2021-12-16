@@ -51,8 +51,9 @@
 ### Entities
 
 * [User](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/User.java)
-* Role
-* Authority
+* [Role](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Role.java)
+* [Authority](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Authority.java)
+* [RoleAuthority](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/RoleAuthority.java)
 * [BookDetail](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/BookDetail.java)
 * [Book](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Book.java)
 * [BookHistory](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/BookHistory.java)
@@ -64,7 +65,7 @@
 * [Holiday](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Holiday.java)
 * [Post](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/Post.java)
 * [CourseSubject](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/CourseSubject.java)
-* [PostComment](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/PostComments.java)
+* [PostComment](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/PostComment.java)
 * [File](https://github.com/mnzit/UniversityPortal/blob/master/src/main/java/com/nepalaya/up/model/File.java)
 
 ### Tables
