@@ -6,10 +6,12 @@ import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "USERS")
@@ -23,7 +25,7 @@ public class User extends BaseEntity<User> implements UserDetails {
     @Column(length = 150, name = "FIRSTNAME", nullable = false)
     private String firstName;
 
-    @Column(length = 150, name = "MIDDLENAME", nullable = true)
+    @Column(length = 150, name = "MIDDLENAME")
     private String middleName;
 
     @Column(length = 150, name = "LASTNAME", nullable = false)
@@ -56,7 +58,11 @@ public class User extends BaseEntity<User> implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return role
+                .getRoleAuthorities()
+                .stream()
+                .map(roleAuthority -> new SimpleGrantedAuthority(roleAuthority.getAuthority().getName()))
+                .collect(Collectors.toList());
     }
 
     @Override
