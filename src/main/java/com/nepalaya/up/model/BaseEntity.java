@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenerationTime;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -30,35 +29,30 @@ public class BaseEntity<T extends User> implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Basic(optional = true)
     @JsonIgnore
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED_DATE", updatable = false)
     private Date createdDate;
 
-    @Basic(optional = true)
     @LastModifiedDate
     @JsonIgnore
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "MODIFIED_DATE",insertable = false)
     private Date modifiedDate;
 
-    @Basic(optional = true)
     @CreatedBy
     @JsonIgnore
     @JoinColumn(name = "CREATED_BY", referencedColumnName = "ID", updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private T createdBy;
 
-    @Basic(optional = true)
     @LastModifiedBy
     @JsonIgnore
     @JoinColumn(name = "MODIFIED_BY", referencedColumnName = "ID", insertable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private T modifiedBy;
 
-    @Basic(optional = true)
     @JsonIgnore
     @Column(name = "STATUS", nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean status;

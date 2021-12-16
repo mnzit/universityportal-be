@@ -5,8 +5,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -19,27 +17,15 @@ import java.util.List;
 @AllArgsConstructor
 public class BookDetail extends BaseEntity<User> {
 
-    @Basic(optional = true)
-    @NotBlank
-    @Size(min = 2, max = 150)
-    @Column(name = "TITLE", nullable = false)
+    @Column(length = 100, name = "TITLE", nullable = false)
     private String title;
 
-    @Basic(optional = true)
-    @NotBlank
-    @Size(min = 2, max = 150)
-    @Column(name = "AUTHOR", nullable = false)
+    @Column(length = 150, name = "AUTHOR", nullable = false)
     private String author;
 
-    @Basic(optional = true)
-    @NotBlank
-    @Size(min = 2, max = 150)
     @Column(name = "PUBLISHED_DATE", nullable = false)
     private Date publishedDate;
 
-    @Basic(optional = true)
-    @NotBlank
-    @Size(min = 2, max = 150)
     @Column(name = "ISBN", nullable = false)
     private Long isbn;
 

@@ -1,11 +1,9 @@
 package com.nepalaya.up.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.nepalaya.up.model.enums.AttendanceState;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "ATTENDANCES")
@@ -16,23 +14,14 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class Attendance extends BaseEntity<User> {
 
-    @JsonBackReference
-    @NotBlank
-    @Size(min = 2, max = 150)
     @ManyToOne
-    @Basic(optional = false)
     @JoinColumn(name = "PROGRAM_ID", referencedColumnName = "ID")
     private Program program;
 
-    @JsonBackReference
-    @NotBlank
-    @Size(min = 2, max = 150)
     @ManyToOne
-    @Basic(optional = false)
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     private User user;
 
-    @Basic(optional = true)
     @Column(name = "STATE", columnDefinition = "enum('PRESENT','ABSENT', 'SICK', 'LEAVE') DEFAULT 'PRESENT'")
     @Enumerated(EnumType.STRING)
     private AttendanceState state;

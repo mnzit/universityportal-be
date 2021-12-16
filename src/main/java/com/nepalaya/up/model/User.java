@@ -1,11 +1,9 @@
 package com.nepalaya.up.model;
 
+import com.nepalaya.up.model.enums.GenderType;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "USERS")
@@ -16,52 +14,33 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class User extends BaseEntity<User> {
 
-    @Basic(optional = true)
-    @NotBlank
-    @Size(min = 2, max = 150)
-    @Column(name = "FIRSTNAME", nullable = false)
+    @Column(length = 150, name = "FIRSTNAME", nullable = false)
     private String firstName;
 
-    @Basic(optional = true)
-    @NotBlank
-    @Size(min = 2, max = 150)
-    @Column(name = "MIDDLENAME", nullable = true)
+    @Column(length = 150, name = "MIDDLENAME", nullable = true)
     private String middleName;
 
-    @Basic(optional = true)
-    @NotBlank
-    @Size(min = 2, max = 150)
-    @Column(name = "LASTNAME", nullable = false)
+    @Column(length = 150, name = "LASTNAME", nullable = false)
     private String lastName;
 
-    @Basic(optional = true)
-    @NotBlank
-    @Size(min = 2, max = 150)
     @Column(name = "GENDER", columnDefinition = "enum('MALE','FEMALE')", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private GenderType genderType;
 
-    @Basic(optional = true)
-    @NotBlank
-    @Column(name = "ADDRESS", nullable = false)
-    @Size(min = 2, max = 200)
+    @Column(length = 150, name = "ADDRESS", nullable = false)
     private String address;
 
-    @NotBlank
-    @Column(name = "CONTACT_NO", nullable = false)
+    @Column(length = 10, name = "CONTACT_NO", nullable = false)
     private String contactNo;
 
-    @Basic(optional = true)
-    @NotBlank
-    @Column(name = "EMAIL_ADDRESS", nullable = false)
-    @Size(min = 2, max = 200)
-    @Email
+    @Column(length = 150, name = "EMAIL_ADDRESS", nullable = false)
     private String emailAddress;
 
-    @Basic(optional = true)
-    @NotBlank
-    @Column(name = "PASSWORD", nullable = false)
-    @Size(min = 8, max = 100)
+    @Column(length = 150, name = "PASSWORD", nullable = false)
     private String password;
+
+    @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Role role;
 
 }

@@ -1,4 +1,4 @@
-package com.nepalaya.up.model;
+package com.nepalaya.up.model.enums;
 
 public enum FileType {
     ZIP,

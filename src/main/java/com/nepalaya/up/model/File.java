@@ -1,11 +1,9 @@
 package com.nepalaya.up.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.nepalaya.up.model.enums.FileType;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "FILES")
@@ -16,13 +14,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class File extends BaseEntity<User> {
 
-    @NotBlank
-    @Size(min = 2, max = 150)
-    @Column(name = "OBJECT_ID")
+    @Column(length = 200, name = "OBJECT_ID", nullable = false)
     private String objectId;
 
-    @Basic(optional = true)
-    @Column(name = "TYPE", columnDefinition = "enum('ZIP','RAR', 'DOCX', 'DOC', 'PDF','PNG','JPG','JPEG','GIF','PPTX','PPT')")
+    @Column(name = "TYPE", columnDefinition = "enum('ZIP','RAR', 'DOCX', 'DOC', 'PDF','PNG','JPG','JPEG','GIF','PPTX','PPT')", nullable = false)
     @Enumerated(EnumType.STRING)
     private FileType type;
 

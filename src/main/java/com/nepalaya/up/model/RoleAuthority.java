@@ -1,7 +1,6 @@
 package com.nepalaya.up.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,11 +16,11 @@ public class RoleAuthority extends BaseEntity<User> {
 
     @JsonBackReference
     @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Role.class)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Role role;
 
     @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Authority.class)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Authority authority;
 
 }
