@@ -22,16 +22,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Response getRoleById(Long id) {
-        Response response = null;
         Optional<Role> optionalRole = roleRepository.findById(id);
         if(optionalRole.isPresent()){
-            Role role = optionalRole.get();
-            //Mapping
-            RoleResponse roleResponse = RoleMapper.mapRole(role);
-            response = ResponseBuilder.success("Role fetched successfully!", roleResponse);
+            RoleResponse data = RoleMapper.mapRole(optionalRole.get());
+            return ResponseBuilder.success("Role fetched successfully!", data);
         }else{
-            response = ResponseBuilder.failure("Role not found");
+            return ResponseBuilder.failure("Role not found");
         }
-        return response;
     }
 }

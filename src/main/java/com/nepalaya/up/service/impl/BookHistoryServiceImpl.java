@@ -1,36 +1,34 @@
 package com.nepalaya.up.service.impl;
 
+import com.nepalaya.up.builder.ResponseBuilder;
+import com.nepalaya.up.dto.Response;
+import com.nepalaya.up.mapper.BookHistoryMapper;
 import com.nepalaya.up.model.Book;
 import com.nepalaya.up.model.BookHistory;
 import com.nepalaya.up.repository.BookHistoryRepository;
 import com.nepalaya.up.response.BookHistoryResponse;
 import com.nepalaya.up.service.BookHistoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class BookHistoryServiceImpl implements BookHistoryService {
 
-    @Autowired
-    private BookHistoryRepository bookHistoryRepository;
+    private final BookHistoryRepository bookHistoryRepository;
+
+    public BookHistoryServiceImpl(BookHistoryRepository bookHistoryRepository) {
+        this.bookHistoryRepository = bookHistoryRepository;
+    }
 
     @Override
-    public List<BookHistoryResponse> getBookHistoryList(Book book) {
+    public Response getBookHistoryList(Book book) {
         List<BookHistory> bookHistories = bookHistoryRepository.findBookHistoriesByBook(book);
-        List<BookHistoryResponse> bookHistoryResponseList = new ArrayList<>();
-
-        for (BookHistory bookHistory : bookHistories) {
-
-            BookHistoryResponse bookHistoryResponse = new BookHistoryResponse();
-            bookHistoryResponse.setName(bookHistory.getUser().getFirstName()+" "+bookHistory.getUser().getMiddleName()+" "+bookHistory.getUser().getLastName());
-            bookHistoryResponse.setTakenDate(bookHistory.getBookTakenDate());
-            bookHistoryResponse.setReturnedDate(bookHistory.getBookReturnedDate());
-
-            bookHistoryResponseList.add(bookHistoryResponse);
+        if(bookHistories.isEmpty()){
+           return ResponseBuilder.failure("Book history not found");
+        }else{
+            List<BookHistoryResponse> data = BookHistoryMapper.mapData(bookHistories);
+            return ResponseBuilder.success("Book history retrieved successfully", data);
         }
-        return bookHistoryResponseList;
     }
 }
