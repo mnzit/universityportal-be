@@ -6,18 +6,6 @@ VALUES ('SUPER_ADMIN', NOW()),
        ('LIBRARIAN', NOW()),
        ('STUDENT', NOW());
 
-INSERT INTO authorities(name, created_date)
-VALUES ('ADD_USER', NOW()),
-       ('VIEW_USER', NOW()),
-       ('UPDATE_USER', NOW()),
-       ('DELETE_USER', NOW());
-
-INSERT INTO role_authorities(role_id, authority_id)
-VALUES (1, 1),
-       (1, 2),
-       (1, 3),
-       (1, 4);
-
 INSERT INTO users(firstname, middlename, lastname, gender, address, contact_no, email_address, password, role_id,
                   created_by, created_date)
 VALUES ('Manjit', NULL, 'Shakya', 'MALE', 'KTM', '9808546851', 'manjit@gmail.com', 'password', 1, null, NOW()),
@@ -63,5 +51,17 @@ values (1, 1, 'PRESENT', NOW(), 1);
 
 INSERT INTO course_subjects(course_id, subject_id, created_date, created_by)
 VALUES (1, 1, NOW(), 1);
+
+INSERT INTO authorities(name, created_date)
+VALUES ('ADD_USER', NOW()),
+       ('VIEW_USER', NOW()),
+       ('UPDATE_USER', NOW()),
+       ('DELETE_USER', NOW());
+
+INSERT INTO role_authorities(role_id, authority_id, created_date)
+VALUES (1, 1, NOW()),
+       (1, 2, NOW()),
+       (1, 3, NOW()),
+       (1, 4, NOW());
 
 

@@ -3,6 +3,9 @@ server:
     context-path: /UniversityPortal
 
 spring:
+  jackson:
+    default-property-inclusion: non_empty
+    serialization.FAIL_ON_EMPTY_BEANS: false
   application:
     name: UniversityPortal
   flyway:

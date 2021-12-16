@@ -3,8 +3,13 @@ package com.nepalaya.up.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nepalaya.up.model.enums.GenderType;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "USERS")
@@ -13,7 +18,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends BaseEntity<User> {
+public class User extends BaseEntity<User> implements UserDetails {
 
     @Column(length = 150, name = "FIRSTNAME", nullable = false)
     private String firstName;
@@ -43,8 +48,39 @@ public class User extends BaseEntity<User> {
     @Column(length = 150, name = "PASSWORD", nullable = false)
     private String password;
 
+    @JsonIgnore
     @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
     private Role role;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return emailAddress;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return getStatus();
+    }
 }

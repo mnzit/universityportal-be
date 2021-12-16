@@ -1,6 +1,5 @@
 package com.nepalaya.up.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.nepalaya.up.model.enums.BookState;
 import lombok.*;
 
@@ -15,8 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Book extends BaseEntity<User> {
 
-    @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "BOOK_DETAIL_ID", referencedColumnName = "ID")
     private BookDetail bookDetail;
 

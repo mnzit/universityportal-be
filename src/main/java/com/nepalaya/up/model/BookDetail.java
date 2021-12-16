@@ -1,5 +1,6 @@
 package com.nepalaya.up.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -29,6 +30,7 @@ public class BookDetail extends BaseEntity<User> {
     @Column(name = "ISBN", nullable = false)
     private Long isbn;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "bookDetail", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     private List<Book> books;

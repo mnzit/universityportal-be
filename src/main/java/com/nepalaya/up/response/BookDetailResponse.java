@@ -14,5 +14,4 @@ public class BookDetailResponse implements Serializable {
     private Integer damagedCount;
     private Integer lostCount;
     private Integer stolenCount;
-
 }

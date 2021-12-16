@@ -14,11 +14,11 @@ import java.util.Date;
 @AllArgsConstructor
 public class BookHistory extends BaseEntity<User> {
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "BOOK_ID", referencedColumnName = "ID")
     private Book book;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     private User user;
 

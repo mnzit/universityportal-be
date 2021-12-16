@@ -1,6 +1,5 @@
 package com.nepalaya.up.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +15,5 @@ public class Response implements Serializable {
 
     private Boolean success;
     private String message;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;
-
 }

@@ -3,7 +3,6 @@ package com.nepalaya.up.service.impl;
 import com.nepalaya.up.builder.ResponseBuilder;
 import com.nepalaya.up.dto.Response;
 import com.nepalaya.up.mapper.BookHistoryMapper;
-import com.nepalaya.up.model.Book;
 import com.nepalaya.up.model.BookHistory;
 import com.nepalaya.up.repository.BookHistoryRepository;
 import com.nepalaya.up.response.BookHistoryResponse;
@@ -22,8 +21,8 @@ public class BookHistoryServiceImpl implements BookHistoryService {
     }
 
     @Override
-    public Response getBookHistoryList(Book book) {
-        List<BookHistory> bookHistories = bookHistoryRepository.findBookHistoriesByBook(book);
+    public Response getBookHistoryList(Long bookId) {
+        List<BookHistory> bookHistories = bookHistoryRepository.findBookHistoriesByBook(bookId);
         if(bookHistories.isEmpty()){
            return ResponseBuilder.failure("Book history not found");
         }else{
