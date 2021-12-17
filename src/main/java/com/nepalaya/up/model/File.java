@@ -18,7 +18,6 @@ public class File extends BaseEntity<User> {
 
     @NotBlank
     @Size(min = 2, max = 150)
-
     @Column(name = "OBJECT_ID")
     private String objectId;
 
@@ -26,7 +25,6 @@ public class File extends BaseEntity<User> {
     @Column(name = "TYPE", columnDefinition = "enum('ZIP','RAR', 'DOCX', 'DOC', 'PDF','PNG','JPG','JPEG','GIF','PPTX','PPT')")
     @Enumerated(EnumType.STRING)
     private FileType type;
-
 
     public File(Long id) {
         super(id);
