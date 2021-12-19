@@ -2,6 +2,7 @@ package com.nepalaya.up.facade;
 
 import com.nepalaya.up.builder.ResponseBuilder;
 import com.nepalaya.up.callback.AuthCallback;
+import com.nepalaya.up.constant.SecurityConstant;
 import com.nepalaya.up.dto.Response;
 import com.nepalaya.up.request.LoginRequest;
 import com.nepalaya.up.util.JwtUtil;
@@ -30,7 +31,13 @@ public class LoginFacade {
             String token = jwtUtil.generateToken(userDetails);
             // Setting token in header
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set(HttpHeaders.AUTHORIZATION, token);
+
+            responseHeaders.set(
+                    HttpHeaders.AUTHORIZATION, new StringBuilder()
+                    .append(SecurityConstant.JWT_PREFIX)
+                    .append(token)
+                    .toString()
+            );
             authCallback.patch(responseHeaders);
             // Return response
             return ResponseBuilder.success("Login Successful");

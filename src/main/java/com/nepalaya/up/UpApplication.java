@@ -12,10 +12,3 @@ public class UpApplication {
 
 }
 
-/**
- * Login
- * Logout
- * Spring Security
- * JWT
- * Create JWT Session
- */

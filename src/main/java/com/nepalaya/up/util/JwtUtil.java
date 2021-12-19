@@ -1,8 +1,7 @@
 package com.nepalaya.up.util;
 
 import com.nepalaya.up.model.User;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,24 +27,45 @@ public class JwtUtil {
         Date expiryDate = new Date(issueDate.getTime() + expiresInMinute * 60 * 1000);
 
         Map<String, Object> claims = new HashMap<>();
-        claims.put("id", user.getId());
         claims.put("status", user.getStatus());
         claims.put("role", user.getRole().getName());
-        claims.put("authorities", user
+        String authorities = user
                 .getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(",")
-                )
-        );
+                .collect(Collectors.joining(","));
+        claims.put("authorities", authorities);
+        claims.put("email", user.getEmailAddress());
 
         return Jwts
                 .builder()
-                .setSubject(user.getFullName())
+                .setSubject(user.getEmailAddress())
                 .setClaims(claims)
-                .setIssuedAt(new Date())
+                .setIssuedAt(issueDate)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
+
+    public boolean validate(String token) {
+        try {
+            Jwts
+                    .parser()
+                    .setSigningKey(secretKey)
+                    .parse(token);
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public Jwt jwt(String token){
+        return Jwts
+                .parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token);
+    }
+
+
 }
