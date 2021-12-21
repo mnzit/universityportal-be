@@ -1,5 +1,7 @@
 package com.nepalaya.up.service.impl;
 
+import com.nepalaya.up.constant.ResponseMsgConstant;
+import com.nepalaya.up.model.User;
 import com.nepalaya.up.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,8 +19,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository
+        User user = userRepository
                 .findByEmailAddress(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Email/Password not correct"));
+                .orElseThrow(() -> new UsernameNotFoundException(ResponseMsgConstant.LOGIN_FAILED));
+        if (!user.getStatus()) {
+            throw new UsernameNotFoundException(ResponseMsgConstant.LOGIN_FAILED);
+        }
+        return user;
     }
 }

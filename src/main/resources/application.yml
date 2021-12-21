@@ -26,5 +26,5 @@ spring:
       hibernate.format_sql: true
 
 jwt:
-  expiresInMinute: 1
+  expiresInMinute: 30
   secretKey: mbA7W_&3Gg'a'{.Z!@4724:%=rF.YjuA

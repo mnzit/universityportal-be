@@ -6,4 +6,8 @@ public class LogUtil {
         System.out.println("[Exception]: " + ex.getMessage());
     }
 
+    public static void exception(String message) {
+        System.out.println("[Exception]: " + message);
+    }
+
 }

@@ -55,12 +55,12 @@ public class JwtUtil {
                     .parse(token);
             return true;
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            LogUtil.exception(ex);
             return false;
         }
     }
 
-    public Jwt jwt(String token){
+    public Jws<Claims> getData(String token){
         return Jwts
                 .parser()
                 .setSigningKey(secretKey)

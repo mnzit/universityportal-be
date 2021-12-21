@@ -2,6 +2,7 @@ package com.nepalaya.up.facade;
 
 import com.nepalaya.up.builder.ResponseBuilder;
 import com.nepalaya.up.callback.AuthCallback;
+import com.nepalaya.up.constant.ResponseMsgConstant;
 import com.nepalaya.up.constant.SecurityConstant;
 import com.nepalaya.up.dto.Response;
 import com.nepalaya.up.request.LoginRequest;
@@ -24,8 +25,10 @@ public class LoginFacade {
 
     public Response login(LoginRequest request, AuthCallback authCallback) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmailAddress());
+
         String requestPassword = request.getPassword();
         String savedPassword = userDetails.getPassword();
+
         if (requestPassword.equals(savedPassword)) {
             // Generating token
             String token = jwtUtil.generateToken(userDetails);
@@ -38,11 +41,12 @@ public class LoginFacade {
                     .append(token)
                     .toString()
             );
+
             authCallback.patch(responseHeaders);
             // Return response
-            return ResponseBuilder.success("Login Successful");
+            return ResponseBuilder.success(ResponseMsgConstant.LOGIN_SUCCESSFUL);
         } else {
-            return ResponseBuilder.failure("Email/Password is incorrect");
+            return ResponseBuilder.failure(ResponseMsgConstant.LOGIN_FAILED);
         }
     }
 }

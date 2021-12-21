@@ -1,5 +1,6 @@
 package com.nepalaya.up.controller;
 
+import com.nepalaya.up.constant.ApiConstant;
 import com.nepalaya.up.dto.Response;
 import com.nepalaya.up.facade.LoginFacade;
 import com.nepalaya.up.request.LoginRequest;
@@ -20,7 +21,7 @@ public class AuthController {
         this.loginFacade = loginFacade;
     }
 
-    @PostMapping("login")
+    @PostMapping(ApiConstant.LOGIN)
     public ResponseEntity<?> authenticateUser(@RequestBody @Valid LoginRequest request) {
         ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok();
         Response response = loginFacade.login(request, responseBuilder::headers);

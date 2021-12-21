@@ -1,44 +1,36 @@
 package com.nepalaya.up.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nepalaya.up.AuthTokenFilter;
-import com.nepalaya.up.builder.ResponseBuilder;
-import com.nepalaya.up.dto.Response;
+import com.nepalaya.up.constant.ApiConstant;
+import com.nepalaya.up.filter.AuthTokenFilter;
+import com.nepalaya.up.util.JwtUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
 @EnableWebSecurity
 @Configuration
+@EnableGlobalMethodSecurity(
+        prePostEnabled = true,
+        securedEnabled = true,
+        jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
+    private final JwtUtil jwtUtil;
 
-    public WebSecurityConfig(UserDetailsService userDetailsService) {
+    public WebSecurityConfig(UserDetailsService userDetailsService, JwtUtil jwtUtil) {
         this.userDetailsService = userDetailsService;
-    }
-
-    private static void commence(HttpServletRequest req, HttpServletResponse res, AuthenticationException authException) throws IOException {
-        res.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        Response response = ResponseBuilder.failure("You are Unauthorized!");
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(res.getOutputStream(), response);
+        this.jwtUtil = jwtUtil;
     }
 
     @Bean
@@ -68,12 +60,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(AuthenticationEntryPointImpl::commence)
+                .accessDeniedHandler(AuthenticationEntryPointImpl::accessDenied)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/login")
+                .antMatchers(ApiConstant.UNSECURE)
                 .permitAll()
                 .anyRequest()
                 .authenticated();
@@ -84,8 +77,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public AuthTokenFilter authTokenFilter(){
-        return new AuthTokenFilter();
+    public AuthTokenFilter authTokenFilter() {
+        return new AuthTokenFilter(jwtUtil, userDetailsService);
     }
 
 }

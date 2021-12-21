@@ -25,4 +25,7 @@ public class Role extends BaseEntity<User> {
     @Fetch(FetchMode.SUBSELECT)
     private List<RoleAuthority> roleAuthorities;
 
+    public Role(Long id) {
+        super(id);
+    }
 }
