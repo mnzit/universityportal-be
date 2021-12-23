@@ -21,10 +21,7 @@ public class AuditingConfig {
 
     @Bean
     public AuditorAware<User> auditorAware() {
-        /**
-         *         User user = (User) SecurityContextHolder.getContext().getAuthentication().getDetails();
-         *         return () -> Optional.of(user);
-         */
-        return () -> Optional.of(userRepository.getById(1L));
+        // Lookup User instance corresponding to logged in user
+        return () -> Optional.ofNullable(userRepository.getById(1L));
     }
 }

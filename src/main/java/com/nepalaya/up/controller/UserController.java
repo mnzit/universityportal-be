@@ -1,19 +1,16 @@
 package com.nepalaya.up.controller;
 
-import com.nepalaya.up.builder.ResponseBuilder;
+import com.nepalaya.up.constant.ApiConstant;
 import com.nepalaya.up.constant.RoleAuthorityConstant;
 import com.nepalaya.up.dto.Response;
-import com.nepalaya.up.model.User;
+import com.nepalaya.up.request.CreateUserRequest;
 import com.nepalaya.up.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping("users")
 public class UserController {
 
     private final UserService userService;
@@ -22,14 +19,26 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public User userDetail(@AuthenticationPrincipal User user){
-        return user;
+    @GetMapping(ApiConstant.PROFILE)
+    public Response currentUser() {
+        return userService.currentUser();
     }
 
-    @PostMapping
+    @PostMapping(ApiConstant.USERS)
     @PreAuthorize(RoleAuthorityConstant.CREATE_USER)
-    public Response createUser(){
-        return ResponseBuilder.success("Works");
+    public Response create(@RequestBody @Valid CreateUserRequest request) {
+        return userService.save(request);
+    }
+
+    @GetMapping(ApiConstant.USERS)
+    @PreAuthorize(RoleAuthorityConstant.VIEW_USER)
+    public Response users() {
+        return userService.getAll();
+    }
+
+    @GetMapping(ApiConstant.USER)
+    @PreAuthorize(RoleAuthorityConstant.VIEW_USER)
+    public Response findUserByEmail(@RequestParam("email") String email) {
+        return userService.getUser(email);
     }
 }

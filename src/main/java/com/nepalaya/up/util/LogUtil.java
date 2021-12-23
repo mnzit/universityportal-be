@@ -1,13 +1,16 @@
 package com.nepalaya.up.util;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class LogUtil {
 
     public static void exception(Exception ex) {
-        System.out.println("[Exception]: " + ex.getMessage());
+        log.error("[Exception]: " + ex.getMessage());
     }
 
     public static void exception(String message) {
-        System.out.println("[Exception]: " + message);
+        log.error("[Exception]: " + message);
     }
 
 }

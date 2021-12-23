@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
@@ -39,7 +40,7 @@ public class User extends BaseEntity<User> implements UserDetails {
     private String address;
 
     @JsonIgnore
-    @Column(length = 10, name = "CONTACT_NO", nullable = false)
+    @Column(length = 20, name = "CONTACT_NO", nullable = false)
     private String contactNo;
 
     @JsonIgnore
@@ -83,6 +84,14 @@ public class User extends BaseEntity<User> implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return false;
+    }
+
+    public List<String> authorities() {
+        return role
+                .getRoleAuthorities()
+                .stream()
+                .map(roleAuthority -> roleAuthority.getAuthority().getName())
+                .collect(Collectors.toList());
     }
 
     @Override

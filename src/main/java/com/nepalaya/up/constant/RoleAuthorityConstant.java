@@ -6,6 +6,7 @@ public interface RoleAuthorityConstant {
 
     // Authorities
     String CREATE_USER = "hasAuthority('ADD_USER')";
+    String VIEW_USER = "hasAuthority('VIEW_USER')";
 
 
 }

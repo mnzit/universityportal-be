@@ -1,5 +1,7 @@
 package com.nepalaya.up.util;
 
+import com.nepalaya.up.exception.AuthenticationFailedException;
+import com.nepalaya.up.exception.JwtTokenExpiredException;
 import com.nepalaya.up.model.User;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,14 +55,16 @@ public class JwtUtil {
                     .parser()
                     .setSigningKey(secretKey)
                     .parse(token);
+
             return true;
+        } catch (ExpiredJwtException ex) {
+            throw new JwtTokenExpiredException();
         } catch (Exception ex) {
-            LogUtil.exception(ex);
-            return false;
+            throw new AuthenticationFailedException();
         }
     }
 
-    public Jws<Claims> getData(String token){
+    public Jws<Claims> getData(String token) {
         return Jwts
                 .parser()
                 .setSigningKey(secretKey)

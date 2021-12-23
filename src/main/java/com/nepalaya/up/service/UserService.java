@@ -5,5 +5,11 @@ import com.nepalaya.up.request.CreateUserRequest;
 
 public interface UserService {
 
-    Response saveUser(CreateUserRequest request);
+    Response currentUser();
+
+    Response save(CreateUserRequest request);
+
+    Response getUser(String email);
+
+    Response getAll();
 }

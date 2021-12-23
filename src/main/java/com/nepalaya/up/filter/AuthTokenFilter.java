@@ -76,9 +76,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                     LogUtil.exception(LogConstant.AUTH_HEADER_INVALID);
                     throw new AuthenticationFailedException();
                 }
-            } else {
-                LogUtil.exception(LogConstant.AUTH_HEADER_INVALID);
-                throw new AuthenticationFailedException();
             }
         } else {
             LogUtil.exception(LogConstant.AUTH_PREFIX_DOESNT_EXIST);
