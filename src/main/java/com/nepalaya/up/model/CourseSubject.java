@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class CourseSubject extends BaseEntity<User> {
 
     @JsonBackReference
-    @ManyToOn
+    @ManyToOne
     @JoinColumn(name = "COURSE_ID", referencedColumnName = "ID")
     private Course course;
 
