@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CourseSubject extends BaseEntity<User> {
-    //asd
+
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "COURSE_ID", referencedColumnName = "ID")
