@@ -1,6 +1,7 @@
 # UniversityPortal
 
 [![Java CI with Maven](https://github.com/mnzit/UniversityPortal/actions/workflows/maven.yml/badge.svg)](https://github.com/mnzit/UniversityPortal/actions/workflows/maven.yml)
+
 ## Prerequisite
 * Core Java
 * Spring Core
