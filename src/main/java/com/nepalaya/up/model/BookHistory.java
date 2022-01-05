@@ -25,7 +25,7 @@ public class BookHistory extends BaseEntity<User> {
     @Column(name = "BOOK_TAKEN_DATE", nullable = false)
     private Date bookTakenDate;
 
-    @Column(name = "BOOK_RETURNED_DATE", nullable = false)
+    @Column(name = "BOOK_RETURNED_DATE")
     private Date bookReturnedDate;
 
     public BookHistory(Long id) {

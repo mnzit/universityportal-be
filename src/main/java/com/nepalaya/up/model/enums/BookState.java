@@ -5,5 +5,6 @@ public enum BookState {
     TAKEN,
     DAMAGED,
     LOST,
-    STOLEN
+    STOLEN,
+    NEW
 }
