@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 @Getter
@@ -14,8 +15,9 @@ public class BookHistoryRequest implements Serializable {
 
     @Min(1)
     private long bookDetailId;
-    @Email
+    @Email(message = "Email format is incorrect!")
     private String email;
-    @NotBlank(message = "you should either borrow or return book")
+    @NotBlank(message = "Should not be blank!")
+    @Pattern(regexp = "return|borrow", message = "Only return or borrow is acceptable!")
     private String type;
 }

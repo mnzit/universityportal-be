@@ -13,7 +13,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: java
+    password: Root@12345
     url: jdbc:mysql://localhost:3306/UNIVERSITY_PORTAL?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
   jpa:
     database: mysql
@@ -26,5 +26,5 @@ spring:
       hibernate.format_sql: true
 
 jwt:
-  expiresInMinute: 1
+  expiresInMinute: 10
   secretKey: mbA7W_&3Gg'a'{.Z!@4724:%=rF.YjuA
