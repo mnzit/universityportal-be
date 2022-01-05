@@ -18,7 +18,7 @@ public class Book extends BaseEntity<User> {
     @JoinColumn(name = "BOOK_DETAIL_ID", referencedColumnName = "ID")
     private BookDetail bookDetail;
 
-    @Column(name = "STATE", columnDefinition = "enum('TAKEN','STOLEN', 'AVAILABLE', 'DAMAGED', 'LOST') DEFAULT 'AVAILABLE'")
+    @Column(name = "STATE", columnDefinition = "enum('TAKEN','STOLEN', 'AVAILABLE', 'DAMAGED', 'LOST', 'NEW') DEFAULT 'NEW'")
     @Enumerated(EnumType.STRING)
     private BookState state;
 

@@ -1,8 +1,13 @@
 package com.nepalaya.up.response;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Getter
+@Setter
 public class BookDetailResponse implements Serializable {
 
     private String title;
@@ -14,4 +19,5 @@ public class BookDetailResponse implements Serializable {
     private Integer damagedCount;
     private Integer lostCount;
     private Integer stolenCount;
+    private Integer newCount;
 }
