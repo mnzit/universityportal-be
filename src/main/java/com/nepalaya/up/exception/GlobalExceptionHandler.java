@@ -10,9 +10,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @ControllerAdvice
@@ -20,13 +19,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Response> invalidParameter(MethodArgumentNotValidException ex) {
-
-        Map<String, Object> fielderror = new HashMap<>();
-        List<FieldError>errors= ex.getFieldErrors();
-        for (FieldError error : errors) {
-            fielderror.put(error.getField(), error.getDefaultMessage());
-        }
-        Response response = ResponseBuilder.failure("Request Parameter is not Valid", fielderror);
+        Map<String, Object> errors =  ex
+                .getFieldErrors()
+                .stream()
+                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+        Response response = ResponseBuilder.failure("Request Parameter is not Valid", errors);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 

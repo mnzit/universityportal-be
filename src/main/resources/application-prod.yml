@@ -1,0 +1,31 @@
+server:
+  servlet:
+    context-path: /UniversityPortal
+  port: ${PORT:8080}
+
+spring:
+  jackson:
+    default-property-inclusion: non_empty
+    serialization.FAIL_ON_EMPTY_BEANS: false
+  application:
+    name: UniversityPortal
+  flyway:
+    enabled: false
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: lbywpamokyllel
+    password: 558bcb86445d04d4f048d2a9bb68eeaa19a4501d010d66f3f357d3d8ac97ef0c
+    url: jdbc:postgres://lbywpamokyllel:558bcb86445d04d4f048d2a9bb68eeaa19a4501d010d66f3f357d3d8ac97ef0c@ec2-18-235-86-66.compute-1.amazonaws.com:5432/d5pseaada5tlqj
+  jpa:
+    database: mysql
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+
+jwt:
+  expiresInMinute: 30
+  secretKey: mbA7W_&3Gg'a'{.Z!@4724:%=rF.YjuA
