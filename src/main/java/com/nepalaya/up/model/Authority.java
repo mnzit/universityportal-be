@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "AUTHORITIES")
+@Table(name = "TBL_AUTHORITIES")
 @Builder
 @Getter
 @Setter

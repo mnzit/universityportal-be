@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ROLE_AUTHORITIES")
+@Table(name = "TBL_ROLE_AUTHORITIES")
 @Builder
 @Getter
 @Setter

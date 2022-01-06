@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "COURSES")
+@Table(name = "TBL_COURSES")
 @Builder
 @Getter
 @Setter

@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "POSTS")
+@Table(name = "TBL_POSTS")
 @Builder
 @Getter
 @Setter

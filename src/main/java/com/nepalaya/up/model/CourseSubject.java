@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "COURSE_SUBJECTS")
+@Table(name = "TBL_COURSE_SUBJECTS")
 @Builder
 @Getter
 @Setter

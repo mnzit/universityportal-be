@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "HOLIDAYS")
+@Table(name = "TBL_HOLIDAYS")
 @Builder
 @Getter
 @Setter
