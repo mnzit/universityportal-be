@@ -28,7 +28,7 @@ public class BaseEntity<T extends User> implements Serializable {
     @Id
     @JsonIgnore
     @Column(name = "ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @JsonIgnore
