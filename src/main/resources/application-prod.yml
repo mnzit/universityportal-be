@@ -1,6 +1,4 @@
 server:
-  servlet:
-    context-path: /UniversityPortal
   port: ${PORT:8080}
 
 spring:
