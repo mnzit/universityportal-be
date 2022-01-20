@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "TBL_POST_COMMENTS")
+@Table(name = "POST_COMMENTS")
 @Builder
 @Getter
 @Setter

@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TBL_POSTS")
+@Table(name = "POSTS")
 @Builder
 @Getter
 @Setter

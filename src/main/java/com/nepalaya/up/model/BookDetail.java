@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "TBL_BOOK_DETAILS")
+@Table(name = "BOOK_DETAILS")
 @Builder
 @Getter
 @Setter

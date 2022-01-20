@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "TBL_BOOK_HISTORIES")
+@Table(name = "BOOK_HISTORIES")
 @Builder
 @Getter
 @Setter

@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "TBL_ROLES")
+@Table(name = "ROLES")
 @Builder
 @Getter
 @Setter
