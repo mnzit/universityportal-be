@@ -21,8 +21,8 @@ insert into books(book_detail_id, created_by, created_date)
 values (1, 1, NOW()),
        (1, 1, NOW());
 
-INSERT INTO book_histories(book_id, user_id, book_taken_date, book_returned_date, created_by, created_date)
-VALUES (1, 1, NOW(), NOW(), 1, NOW());
+-- INSERT INTO book_histories(book_id, user_id, book_taken_date, book_returned_date, created_by, created_date)
+-- VALUES (1, 1, NOW(), NOW(), 1, NOW());
 
 INSERT INTO courses(title, description, duration, duration_type, created_date, created_by)
 VALUES ('Bachelor In Information Technology', '<p>Bachelor of Information Technology(BIT) is one of the demanding and popular courses. The course will equip students with the technical skills and knowledge to succeed in&nbsp;this expanding and diverse industry. Students will get exposed to practical experience in the field of information technology that can&nbsp;apply technical skills to solve problems, support innovation, and improve communication between people. Bachelor of Information Technology is offered by two Universities in Nepal - Tribhuvan University and Purbanchal University.</p>

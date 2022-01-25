@@ -10,7 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ * localhost:8080/UniversityPortal/users GET
+ * localhost:8080/UniversityPortal/users POST
+ * localhost:8080/UniversityPortal/users/search?email=manjit@gmail.com GET
+ */
+
 @RestController
+@RequestMapping(ApiConstant.USERS)
 public class UserController {
 
     private final UserService userService;
@@ -19,26 +26,21 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(ApiConstant.PROFILE)
-    public Response currentUser() {
-        return userService.currentUser();
-    }
-
-    @PostMapping(ApiConstant.USERS)
+    @PostMapping
     @PreAuthorize(RoleAuthorityConstant.CREATE_USER)
     public Response create(@RequestBody @Valid CreateUserRequest request) {
         return userService.save(request);
     }
 
-    @GetMapping(ApiConstant.USERS)
+    @GetMapping
     @PreAuthorize(RoleAuthorityConstant.VIEW_USER)
     public Response users() {
         return userService.getAll();
     }
 
-    @GetMapping(ApiConstant.USER)
+    @GetMapping(ApiConstant.SEARCH)
     @PreAuthorize(RoleAuthorityConstant.VIEW_USER)
-    public Response findUserByEmail(@RequestParam("email") String email) {
+    public Response findUserByEmail(@RequestParam String email) {
         return userService.getUser(email);
     }
 }
