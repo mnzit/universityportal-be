@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "CLIENTS")
 @Builder
 @Getter
 @Setter
