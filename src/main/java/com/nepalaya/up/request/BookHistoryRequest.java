@@ -3,21 +3,22 @@ package com.nepalaya.up.request;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 @Getter
 @Setter
 public class BookHistoryRequest implements Serializable {
 
-    @Min(1)
-    private long bookDetailId;
+    @NotNull(message = "Book detail id is required!")
+    @Min(value = 1, message = "Book detail id is must be greater than zero!")
+    private Long bookId;
+
+    @NotBlank(message = "Email is required!")
     @Email(message = "Email format is incorrect!")
     private String email;
-    @NotBlank(message = "Should not be blank!")
+
+    @NotBlank(message = "Type is required!")
     @Pattern(regexp = "return|borrow", message = "Only return or borrow is acceptable!")
     private String type;
 }

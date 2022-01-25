@@ -9,8 +9,15 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ * localhost:8080/UniversityPortal/books POST
+ * localhost:8080/UniversityPortal/books/1 GET
+ * localhost:8080/UniversityPortal/books GET
+ * localhost:8080/UniversityPortal/books/copy/1 POST
+ * localhost:8080/UniversityPortal/books/action POST
+ */
 @RestController
-@RequestMapping(ApiConstant.BOOK)
+@RequestMapping(ApiConstant.BOOKS)
 public class BookController {
 
     private BookService bookService;
@@ -21,26 +28,25 @@ public class BookController {
 
     @PostMapping
     public Response addBook(@RequestBody @Valid BookDetailRequest request) {
-
         return bookService.saveBook(request);
     }
 
-    @GetMapping
-    public Response getBookById(@RequestParam long bookDetailId) {
+    @GetMapping(ApiConstant.WRAPPED_ID)
+    public Response getBookById(@PathVariable(ApiConstant.ID) Long bookDetailId) {
         return bookService.getBook(bookDetailId);
     }
 
-    @GetMapping(ApiConstant.ALL)
+    @GetMapping
     public Response books() {
         return bookService.getAllBooks();
     }
 
-    @PostMapping(ApiConstant.COPY)
-    public Response addBookCopy(@RequestParam long bookDetailId) {
+    @PostMapping(ApiConstant.COPY + ApiConstant.WRAPPED_ID)
+    public Response addBookCopy(@PathVariable(ApiConstant.ID) long bookDetailId) {
         return bookService.addCopy(bookDetailId);
     }
 
-    @PostMapping("action")
+    @PostMapping(ApiConstant.ACTION)
     public Response borrowBook(@RequestBody @Valid BookHistoryRequest request) {
 
         if (request.getType().equals("borrow")) {

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,21 +12,20 @@ import java.util.Date;
 @Setter
 public class BookDetailRequest implements Serializable {
 
-    @Max(100)
-    @NotEmpty
-    @Pattern(regexp = "[a-zA-Z]")
+
+    @NotEmpty(message = "Title is required!")
+//    @Pattern(regexp = "[a-zA-Z]", message = "Only supports Alphabets!")
     private String title;
 
-    @Min(2)
-    @Max(100)
-    @Pattern(regexp = "[a-zA-Z]")
-    @NotEmpty
+
+//    @Pattern(regexp = "[a-zA-Z]", message = "Only supports Alphabets!")
+    @NotEmpty(message = "Author is required!")
     private String author;
 
-    @NotEmpty
+    @NotNull(message = "Published Date is required!")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date publishedDate;
 
-    @NotEmpty
+    @NotNull(message = "ISBN is required!")
     private Long isbn;
 }

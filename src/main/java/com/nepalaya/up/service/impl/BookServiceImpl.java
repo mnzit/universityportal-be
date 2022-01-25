@@ -48,12 +48,9 @@ public class BookServiceImpl implements BookService {
     public Response saveBook(BookDetailRequest request) {
 
         try {
-            Book book = new Book();
             BookDetail bookDetail = BookBuilder.buildBook(request);
-            bookDetail = bookDetailRepository.save(bookDetail);
-            book.setBookDetail(bookDetail);
-            book = bookRepository.save(book);
-            return ResponseBuilder.success("book saved successfully with id :" + book.getId());
+            bookDetailRepository.save(bookDetail);
+            return ResponseBuilder.success("Book detail added successfully!");
         } catch (Exception ex) {
             LogUtil.exception(ex.getMessage());
             throw new SystemException();
@@ -99,7 +96,6 @@ public class BookServiceImpl implements BookService {
 
             Book book = new Book();
             book.setBookDetail(bookDetail);
-            book.setState(BookState.NEW);
             bookRepository.save(book);
             return ResponseBuilder.success("book added successfully");
         } catch (Exception ex) {
@@ -114,8 +110,10 @@ public class BookServiceImpl implements BookService {
         try {
             User user = userRepository.findByEmailAddress(request.getEmail())
                     .orElseThrow(() -> new DataNotFoundException(String.format("User not found with email %s", request.getEmail())));
+
             BookDetail bookDetail = new BookDetail();
-            bookDetail.setId(request.getBookDetailId());
+            bookDetail.setId(request.getBookId());
+
             List<Book> books = bookRepository.getAvailableBooks(bookDetail);
 
             if (!books.isEmpty()) {
@@ -148,7 +146,7 @@ public class BookServiceImpl implements BookService {
                     .orElseThrow(() -> new DataNotFoundException(String.format("User not found with email %s", bookHistoryRequest.getEmail())));
 
             BookDetail bookDetail = new BookDetail();
-            bookDetail.setId(bookHistoryRequest.getBookDetailId());
+            bookDetail.setId(bookHistoryRequest.getBookId());
 
             BookHistory history = bookHistoryRepository.findBorrowedBook(bookDetail, user);
             if (history != null) {
@@ -157,6 +155,7 @@ public class BookServiceImpl implements BookService {
 
                 Book book = history.getBook();
                 book.setState(BookState.AVAILABLE);
+                bookRepository.save(book);
 
                 return ResponseBuilder.success("your book has bee successfully returned");
             } else {

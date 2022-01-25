@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Query("select b from Book b where b.bookDetail = :bookDetail and b.state='AVAILABLE'")
+    @Query("SELECT b FROM Book b WHERE b.bookDetail = :bookDetail AND b.state='AVAILABLE' OR b.state = 'NEW'")
     List<Book> getAvailableBooks(@Param("bookDetail") BookDetail bookDetail);
 
 }

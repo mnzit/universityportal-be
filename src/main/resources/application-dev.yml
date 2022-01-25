@@ -1,3 +1,6 @@
+server:
+  servlet:
+    context-path: /UniversityPortal
 spring:
   jackson:
     default-property-inclusion: non_empty
