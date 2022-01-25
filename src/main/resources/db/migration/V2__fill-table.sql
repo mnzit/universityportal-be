@@ -6,7 +6,7 @@ VALUES ('SUPER_ADMIN', NOW()),
        ('LIBRARIAN', NOW()),
        ('STUDENT', NOW());
 
-INSERT INTO clients(firstname, middlename, lastname, gender, address, contact_no, email_address, password, role_id,
+INSERT INTO tbl_users(firstname, middlename, lastname, gender, address, contact_no, email_address, password, role_id,
                   created_by, created_date)
 VALUES ('Manjit', NULL, 'Shakya', 'MALE', 'KTM', '9808546851', 'manjit@gmail.com', 'password', 1, null, NOW()),
        ('Anita', NULL, 'Joshi', 'FEMALE', 'KTM', '9808546852', 'anita@gmail.com', 'password', 1, 1, NOW()),
