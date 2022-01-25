@@ -13,4 +13,9 @@ public class LogUtil {
         log.error("[Exception]: " + message);
     }
 
+
+    public static void info(String message) {
+        log.info("[Info]: " + message);
+    }
+
 }

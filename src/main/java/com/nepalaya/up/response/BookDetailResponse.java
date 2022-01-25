@@ -14,6 +14,7 @@ public class BookDetailResponse implements Serializable {
     private String author;
     private Date publishedDate;
     private Long isbn;
+    private Integer totalCount;
     private Integer availableCount;
     private Integer takenCount;
     private Integer damagedCount;
