@@ -30,8 +30,18 @@ public class Course extends BaseEntity<User> {
     @Enumerated(EnumType.STRING)
     private DurationType durationType;
 
+    @Column(name="CREDIT_HR_PER_SEMESTER")
+    private Long creditHrPerSemester;
+
+    @Column(name="SEMESTER")
+    private Long semester;
+
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     private List<CourseSubject> subjects;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Program> programs;
 
 }

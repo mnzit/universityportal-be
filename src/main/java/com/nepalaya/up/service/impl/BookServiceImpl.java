@@ -143,6 +143,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Response borrowBook(BookHistoryRequest request) {
         try {
+
             User user = userRepository
                     .findByEmailAddress(request.getEmail())
                     .orElseThrow(() -> new DataNotFoundException(String.format("User not found with email %s", request.getEmail())));

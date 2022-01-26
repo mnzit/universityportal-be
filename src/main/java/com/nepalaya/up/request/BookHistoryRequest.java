@@ -20,4 +20,10 @@ public class BookHistoryRequest implements Serializable {
     private String email;
 
     private BookHistoryEnum type;
+
+//    {
+//        "bookId": 1,
+//        "email": "mnzithsakya@gmail.com",
+//        "type": "RRR" // Source -> Target
+//    }
 }

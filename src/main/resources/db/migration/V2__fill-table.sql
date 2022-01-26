@@ -46,8 +46,8 @@ VALUES ('Java', 'Java is nice', 8, NOW(), 1);
 INSERT INTO programs(year, month, course_id, created_date, created_by)
 VALUES (2021, 07, 1, NOW(), 1);
 
-insert into attendances(program_id, user_id, state, created_date, created_by)
-values (1, 1, 'PRESENT', NOW(), 1);
+insert into attendances(user_id, state, created_date, created_by)
+values (1, 'PRESENT', NOW(), 1);
 
 INSERT INTO course_subjects(course_id, subject_id, created_date, created_by)
 VALUES (1, 1, NOW(), 1);

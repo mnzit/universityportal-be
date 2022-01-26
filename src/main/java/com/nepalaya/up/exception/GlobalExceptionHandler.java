@@ -8,17 +8,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.UnexpectedTypeException;
 import java.util.*;
 
 @Slf4j
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -62,11 +61,10 @@ public class GlobalExceptionHandler {
         LogUtil.exception(ex.getMessage());
         String message = "System Error";
 
-        List<String> errors = new ArrayList<>();
+        List<String> errors = null;
 
         if (ex.getTargetType().getType().isEnum()) {
-            Class aClass = ex.getTargetType().getType();
-            EnumSet.allOf(aClass).forEach((e) -> errors.add(e.toString()));
+            errors = extractEnums(ex.getTargetType().getType());
             message = ex.getValue() + " is not supported. Supported types are listed below";
         }
 
@@ -75,16 +73,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ExceptionHandler(InvalidFormatException.class)
     public ResponseEntity<Response> httpMessageNotReadableException(InvalidFormatException ex) {
         LogUtil.exception(ex.getMessage());
         String message = "System Error";
 
-        List<String> errors = new ArrayList<>();
+        List<String> errors = null;
 
         if (ex.getTargetType().isEnum()) {
-            Class aClass = ex.getTargetType();
-            EnumSet.allOf(aClass).forEach((e) -> errors.add(e.toString()));
+            errors = extractEnums(ex.getTargetType());
             message = ex.getValue() + " is not supported. Supported types are listed below";
         }
 
@@ -98,5 +95,11 @@ public class GlobalExceptionHandler {
         LogUtil.exception(ex.getMessage());
         Response response = ResponseBuilder.failure("System Error");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    public List<String> extractEnums(Class aClass) {
+        List<String> errors = new ArrayList<>();
+        EnumSet.allOf(aClass).forEach((e) -> errors.add(e.toString()));
+        return errors;
     }
 }
