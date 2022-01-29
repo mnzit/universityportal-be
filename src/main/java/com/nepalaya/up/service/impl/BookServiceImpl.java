@@ -92,8 +92,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public Response addCopy(Long bookDetailId) {
         try {
+            BookDetail bookDetail = bookDetailRepository.findById(bookDetailId).orElseThrow(() -> new DataNotFoundException("Book detail not found!"));
             Book book = new Book();
-            book.setBookDetail(new BookDetail(bookDetailId));
+            book.setBookDetail(bookDetail);
             bookRepository.save(book);
             return ResponseBuilder.success("Book copy created successfully");
         } catch (Exception ex) {
