@@ -8,9 +8,9 @@ spring:
     enabled: false
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: lbywpamokyllel
-    password: 558bcb86445d04d4f048d2a9bb68eeaa19a4501d010d66f3f357d3d8ac97ef0c
-    url: jdbc:postgresql://ec2-18-235-86-66.compute-1.amazonaws.com:5432/d5pseaada5tlqj
+#    username: lbywpamokyllel
+#    password: 558bcb86445d04d4f048d2a9bb68eeaa19a4501d010d66f3f357d3d8ac97ef0c
+#    url: jdbc:postgresql://ec2-18-235-86-66.compute-1.amazonaws.com:5432/d5pseaada5tlqj
   jpa:
     database: postgresql
     show-sql: true
