@@ -10,6 +10,7 @@ import java.util.Date;
 @Setter
 public class BookDetailResponse implements Serializable {
 
+    private Long id;
     private String title;
     private String author;
     private Date publishedDate;

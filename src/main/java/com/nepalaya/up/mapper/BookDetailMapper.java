@@ -13,6 +13,7 @@ public class BookDetailMapper {
     public static BookDetailResponse mapBookDetail(BookDetail bookDetail) {
 
         BookDetailResponse response = new BookDetailResponse();
+        response.setId(bookDetail.getId());
         response.setTitle(bookDetail.getTitle());
         response.setAuthor(bookDetail.getAuthor());
         response.setPublishedDate(bookDetail.getPublishedDate());
