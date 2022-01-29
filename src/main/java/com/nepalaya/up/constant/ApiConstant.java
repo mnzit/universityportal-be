@@ -13,6 +13,7 @@ public interface ApiConstant {
     String WRAPPED_ID = "/{" + ID + "}";
 
     String BOOKS = "/books";
+    String COURSES = "/courses";
     String COPY = "/copy";
     String ACTION = "/action";
     String STATE = "state";
