@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration
 public class AppConfig {
+
     @Bean
     public PasswordGenerator passwordGenerator(){
         return new PasswordGenerator();
