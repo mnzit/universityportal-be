@@ -19,10 +19,10 @@ public class Book extends BaseEntity<User> {
     @JoinColumn(name = "BOOK_DETAIL_ID", referencedColumnName = "ID")
     private BookDetail bookDetail;
 
-    @Column(name = "STATE", columnDefinition = "enum('TAKEN','STOLEN', 'AVAILABLE', 'DAMAGED', 'LOST', 'NEW') DEFAULT 'NEW'")
+    @Column(name = "STATE")
     @org.hibernate.annotations.Generated(GenerationTime.INSERT)
     @Enumerated(EnumType.STRING)
-    private BookState state;
+    private BookState state = BookState.NEW;
 
     public Book(Long id) {
         super(id);

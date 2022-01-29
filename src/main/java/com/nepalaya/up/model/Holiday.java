@@ -20,4 +20,5 @@ public class Holiday extends BaseEntity<User> {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "DATE", nullable = false)
     private Date date;
+
 }

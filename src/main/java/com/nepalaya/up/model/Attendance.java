@@ -19,8 +19,8 @@ public class Attendance extends BaseEntity<User> {
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     private User user;
 
-    @Column(name = "STATE", columnDefinition = "enum('PRESENT','ABSENT', 'SICK', 'LEAVE') DEFAULT 'PRESENT'")
+    @Column(name = "STATE")
     @Enumerated(EnumType.STRING)
     @org.hibernate.annotations.Generated(GenerationTime.INSERT)
-    private AttendanceState state;
+    private AttendanceState state = AttendanceState.PRESENT;
 }
