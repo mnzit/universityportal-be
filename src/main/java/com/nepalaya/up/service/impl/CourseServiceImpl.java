@@ -6,13 +6,10 @@ import com.nepalaya.up.builder.ResponseBuilder;
 import com.nepalaya.up.dto.Response;
 import com.nepalaya.up.exception.DataNotFoundException;
 import com.nepalaya.up.exception.SystemException;
-import com.nepalaya.up.mapper.BookDetailMapper;
 import com.nepalaya.up.mapper.CourseMapper;
-import com.nepalaya.up.model.Book;
 import com.nepalaya.up.model.Course;
 import com.nepalaya.up.repository.CourseRepository;
 import com.nepalaya.up.request.CourseDetailRequest;
-import com.nepalaya.up.response.BookDetailResponse;
 import com.nepalaya.up.response.CourseResponse;
 import com.nepalaya.up.service.CourseService;
 import org.springframework.http.HttpStatus;
@@ -49,6 +46,7 @@ public class CourseServiceImpl implements CourseService {
         try {
             CourseResponse courseResponse = CourseMapper.mapCourse(courseRepository
                     .findById(courseId)
+                    .filter(Course::getStatus)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
 
             return ResponseBuilder.success("Course detail fetched successfully", courseResponse);
@@ -62,6 +60,7 @@ public class CourseServiceImpl implements CourseService {
         try {
             List<CourseResponse> courseResponses = courseRepository.findAll()
                     .stream()
+                    .filter(Course::getStatus)
                     .map(CourseMapper::mapCourse)
                     .collect(Collectors.toList());
             return ResponseBuilder.success("Course details fetched successfully", courseResponses);
