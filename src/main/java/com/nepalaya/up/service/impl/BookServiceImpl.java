@@ -74,11 +74,16 @@ public class BookServiceImpl implements BookService {
     @Override
     public Response getAllBooks() {
         try {
-            List<BookDetailResponse> bookDetailResponses = bookDetailRepository.findAll()
-                    .stream()
-                    .map(BookDetailMapper::mapBookDetail)
-                    .collect(Collectors.toList());
-            return ResponseBuilder.success("Book details fetched successfully", bookDetailResponses);
+            List<BookDetail> bookDetail = bookDetailRepository.findAll();
+            if (bookDetail != null) {
+                List<BookDetailResponse> bookDetailResponses = bookDetail.stream()
+                        .map(BookDetailMapper::mapBookDetail)
+                        .collect(Collectors.toList());
+                return ResponseBuilder.success("Book details fetched successfully", bookDetailResponses);
+            } else {
+                return ResponseBuilder.failure("Book details not found");
+            }
+
         } catch (Exception ex) {
             throw new SystemException(ex.getMessage());
         }
@@ -87,8 +92,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public Response addCopy(Long bookDetailId) {
         try {
+            BookDetail bookDetail = bookDetailRepository.findById(bookDetailId).orElseThrow(() -> new DataNotFoundException("Book detail not found!"));
             Book book = new Book();
-            book.setBookDetail(new BookDetail(bookDetailId));
+            book.setBookDetail(bookDetail);
             bookRepository.save(book);
             return ResponseBuilder.success("Book copy created successfully");
         } catch (Exception ex) {

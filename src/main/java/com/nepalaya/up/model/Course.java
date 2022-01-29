@@ -26,9 +26,9 @@ public class Course extends BaseEntity<User> {
     @Column(length = 2, name = "DURATION", nullable = false)
     private Double duration;
 
-    @Column(name = "DURATION_TYPE", columnDefinition = "enum('MINUTE','HOUR', 'MONTH', 'YEAR') DEFAULT 'YEAR'")
+    @Column(name = "DURATION_TYPE", nullable = false)
     @Enumerated(EnumType.STRING)
-    private DurationType durationType;
+    private DurationType durationType = DurationType.YEAR;
 
     @Column(name="CREDIT_HR_PER_SEMESTER")
     private Long creditHrPerSemester;
