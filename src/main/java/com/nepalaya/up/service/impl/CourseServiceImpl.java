@@ -60,7 +60,6 @@ public class CourseServiceImpl implements CourseService {
         try {
             List<CourseResponse> courseResponses = courseRepository.findAll()
                     .stream()
-                    .filter(Course::getStatus)
                     .map(CourseMapper::mapCourse)
                     .collect(Collectors.toList());
             return ResponseBuilder.success("Course details fetched successfully", courseResponses);
