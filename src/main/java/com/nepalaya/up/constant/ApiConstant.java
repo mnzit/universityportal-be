@@ -16,8 +16,10 @@ public interface ApiConstant {
     String BOOKS = "/books";
     String COURSES = "/courses";
     String COPY = "/copy";
+    String NUMBER = "/{number}";
     String ACTION = "/action";
     String STATE = "state";
+    String HOLIDAY = "/holidays";
 
     // List all the API Paths to bypass Authentication Here
     String[] UNSECURE = new String[]{

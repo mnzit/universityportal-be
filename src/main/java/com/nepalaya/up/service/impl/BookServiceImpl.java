@@ -24,6 +24,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -90,12 +91,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Response addCopy(Long bookDetailId) {
+    public Response addCopy(Long bookDetailId, Integer noOfCopies) {
         try {
-            BookDetail bookDetail = bookDetailRepository.findById(bookDetailId).orElseThrow(() -> new DataNotFoundException("Book detail not found!"));
-            Book book = new Book();
-            book.setBookDetail(bookDetail);
-            bookRepository.save(book);
+            for(int i= 1; i<=noOfCopies; i++) {
+                BookDetail bookDetail = bookDetailRepository.findById(bookDetailId).orElseThrow(() -> new DataNotFoundException("Book detail not found!"));
+                Book book = new Book();
+                book.setBookDetail(bookDetail);
+                bookRepository.save(book);
+            }
             return ResponseBuilder.success("Book copy created successfully");
         } catch (Exception ex) {
             throw new SystemException(ex.getMessage());
