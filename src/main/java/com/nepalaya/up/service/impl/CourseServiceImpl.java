@@ -46,7 +46,6 @@ public class CourseServiceImpl implements CourseService {
         try {
             CourseResponse courseResponse = CourseMapper.mapCourse(courseRepository
                     .findById(courseId)
-                    .filter(Course::getStatus)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
 
             return ResponseBuilder.success("Course detail fetched successfully", courseResponse);
