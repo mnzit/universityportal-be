@@ -10,6 +10,7 @@ import com.nepalaya.up.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 /**
  * POST -> localhost:8080/UniversityPortal/books
@@ -45,9 +46,13 @@ public class BookController {
         return bookService.getBook(bookDetailId);
     }
 
-    @PostMapping(ApiConstant.WRAPPED_ID + ApiConstant.COPY)
-    public Response addBookCopy(@PathVariable(ApiConstant.ID) Long bookDetailId) {
-        return bookService.addCopy(bookDetailId);
+    @PostMapping({ApiConstant.WRAPPED_ID + ApiConstant.COPY, ApiConstant.WRAPPED_ID + ApiConstant.COPY + ApiConstant.NUMBER})
+    public Response addBookCopy(@PathVariable(ApiConstant.ID) Long bookDetailId, @PathVariable("number") Optional<Integer> noOfCopies) {
+        if (noOfCopies.isPresent()) {
+            return bookService.addCopy(bookDetailId, noOfCopies.get());
+        } else {
+            return bookService.addCopy(bookDetailId, 1);
+        }
     }
 
     @PutMapping(ApiConstant.COPY + ApiConstant.WRAPPED_ID)
@@ -59,6 +64,7 @@ public class BookController {
     public Response deleteBookCopy(@PathVariable(ApiConstant.ID) Long bookId) {
         return bookService.deleteCopy(bookId);
     }
+
     @PostMapping(ApiConstant.ACTION)
     public Response borrowBook(@RequestBody @Valid BookHistoryRequest request) {
         if (request.getType().compareTo(BookHistoryEnum.BORROW) == 0) {
