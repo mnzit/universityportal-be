@@ -5,6 +5,8 @@ import com.nepalaya.up.model.enums.BookState;
 import com.nepalaya.up.request.BookDetailRequest;
 import com.nepalaya.up.request.BookHistoryRequest;
 
+import java.util.Optional;
+
 public interface BookService {
 
     Response saveBook(BookDetailRequest request);
@@ -13,7 +15,7 @@ public interface BookService {
 
     Response getAllBooks();
 
-    Response addCopy(Long bookDetailId);
+    Response addCopy(Long bookDetailId, Integer noOfCopies);
 
     Response updateCopy(Long bookId, BookState state);
 
