@@ -12,9 +12,7 @@ import com.nepalaya.up.repository.CourseRepository;
 import com.nepalaya.up.request.CourseDetailRequest;
 import com.nepalaya.up.response.CourseResponse;
 import com.nepalaya.up.service.CourseService;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -44,10 +42,11 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Response getCourse(Long courseId) {
         try {
-            CourseResponse courseResponse = CourseMapper.mapCourse(courseRepository
+            Course course = courseRepository
                     .findById(courseId)
-                    .filter(Course::getStatus)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
+                    .orElseThrow(() -> new DataNotFoundException("Course not found!"));
+
+            CourseResponse courseResponse = CourseMapper.mapCourse(course);
 
             return ResponseBuilder.success("Course detail fetched successfully", courseResponse);
         } catch (Exception ex) {
