@@ -4,6 +4,7 @@ public interface ApiConstant {
 
     String PING = "/";
     String LOGIN = "/login";
+    String FAVICON = "/favicon";
     String PROFILE = "/profile";
     String USERS = "/users";
     String SEARCH = "/search";
@@ -21,6 +22,7 @@ public interface ApiConstant {
     // List all the API Paths to bypass Authentication Here
     String[] UNSECURE = new String[]{
             PING,
-            LOGIN
+            LOGIN,
+            FAVICON
     };
 }
