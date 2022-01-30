@@ -4,7 +4,7 @@ public interface ApiConstant {
 
     String PING = "/";
     String LOGIN = "/login";
-    String FAVICON = "/favicon";
+    String FAVICON = "/favicon.ico";
     String PROFILE = "/profile";
     String USERS = "/users";
     String SEARCH = "/search";
