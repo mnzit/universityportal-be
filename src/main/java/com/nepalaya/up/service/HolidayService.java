@@ -6,5 +6,5 @@ public interface HolidayService {
 
     Response scrapHoliday();
 
-    Response getAllHolidays(long bookDetailId);
+    Response getAllHolidays();
 }

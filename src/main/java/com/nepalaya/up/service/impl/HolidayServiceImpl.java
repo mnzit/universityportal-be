@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class HolidayServiceImpl implements HolidayService {
 
-    private HolidayRepository holidayRepository;
+    private final HolidayRepository holidayRepository;
 
     public HolidayServiceImpl(HolidayRepository holidayRepository) {
         this.holidayRepository = holidayRepository;
@@ -24,17 +24,18 @@ public class HolidayServiceImpl implements HolidayService {
     public Response scrapHoliday() {
         try {
             List<Holiday> holidays = HolidayScrapper.scrapHoliday();
-           for(Holiday holiday: holidays){
-               holidayRepository.save(holiday);
-           }
-           return ResponseBuilder.success("holidays scrapped successfully");
-        } catch (Exception exception){
+            for (Holiday holiday : holidays) {
+                holidayRepository.save(holiday);
+            }
+            return ResponseBuilder.success("Holidays scrapped successfully");
+        } catch (Exception exception) {
             throw new SystemException(exception.getMessage());
         }
     }
 
     @Override
-    public Response getAllHolidays(long bookDetailId) {
-        return null;
+    public Response getAllHolidays() {
+        return ResponseBuilder
+                .success("Holidays fetched successfully!", holidayRepository.findAll());
     }
 }

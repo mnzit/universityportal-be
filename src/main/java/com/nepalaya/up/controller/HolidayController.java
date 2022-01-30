@@ -21,4 +21,10 @@ public class HolidayController {
     public Response scrapHolidays(){
        return holidayService.scrapHoliday();
     }
+
+
+    @GetMapping
+    public Response getAll(){
+        return holidayService.getAllHolidays();
+    }
 }
