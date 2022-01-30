@@ -35,4 +35,7 @@ public class BookDetail extends BaseEntity<User> {
     @Fetch(FetchMode.SUBSELECT)
     private List<Book> books;
 
+    public BookDetail(Long id) {
+        super(id);
+    }
 }

@@ -1,5 +1,6 @@
 package com.nepalaya.up.request;
 
+import com.nepalaya.up.request.enums.BookHistoryEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +19,11 @@ public class BookHistoryRequest implements Serializable {
     @Email(message = "Email format is incorrect!")
     private String email;
 
-    @NotBlank(message = "Type is required!")
-    @Pattern(regexp = "return|borrow", message = "Only return or borrow is acceptable!")
-    private String type;
+    private BookHistoryEnum type;
+
+//    {
+//        "bookId": 1,
+//        "email": "mnzithsakya@gmail.com",
+//        "type": "RRR" // Source -> Target
+//    }
 }

@@ -8,11 +8,11 @@ VALUES ('SUPER_ADMIN', NOW()),
 
 INSERT INTO users(firstname, middlename, lastname, gender, address, contact_no, email_address, password, role_id,
                   created_by, created_date)
-VALUES ('Manjit', NULL, 'Shakya', 'MALE', 'KTM', '9808546851', 'manjit@gmail.com', 'password', 1, null, NOW()),
-       ('Anita', NULL, 'Joshi', 'FEMALE', 'KTM', '9808546852', 'anita@gmail.com', 'password', 1, 1, NOW()),
-       ('Nawaraj', NULL, 'Shrestha', 'MALE', 'KTM', '9808546853', 'nawaraj@gmail.com', 'password', 1, 1, NOW()),
-       ('Sapana', NULL, 'Rimal', 'FEMALE', 'KTM', '9808546854', 'sapana@gmail.com', 'password', 1, 1, NOW()),
-       ('Nabin', NULL, 'Shrestha', 'MALE', 'KTM', '9808546855', 'nabin@gmail.com', 'password', 1, 1, NOW());
+VALUES ('Manjit', NULL, 'Shakya', 'MALE', 'KTM', '9808546851', 'manjit@gmail.com', '$2a$10$ce7eMkNvFkn9NbZL7yRVX.wjCfF4Aa75D5TLgfo.U5ixw806HFwXq', 1, null, NOW()),
+       ('Anita', NULL, 'Joshi', 'FEMALE', 'KTM', '9808546852', 'anita@gmail.com', '$2a$10$ce7eMkNvFkn9NbZL7yRVX.wjCfF4Aa75D5TLgfo.U5ixw806HFwXq', 1, 1, NOW()),
+       ('Nawaraj', NULL, 'Shrestha', 'MALE', 'KTM', '9808546853', 'nawaraj@gmail.com', '$2a$10$ce7eMkNvFkn9NbZL7yRVX.wjCfF4Aa75D5TLgfo.U5ixw806HFwXq', 1, 1, NOW()),
+       ('Sapana', NULL, 'Rimal', 'FEMALE', 'KTM', '9808546854', 'sapana@gmail.com', '$2a$10$ce7eMkNvFkn9NbZL7yRVX.wjCfF4Aa75D5TLgfo.U5ixw806HFwXq', 1, 1, NOW()),
+       ('Nabin', NULL, 'Shrestha', 'MALE', 'KTM', '9808546855', 'nabin@gmail.com', '$2a$10$ce7eMkNvFkn9NbZL7yRVX.wjCfF4Aa75D5TLgfo.U5ixw806HFwXq', 1, 1, NOW());
 
 INSERT INTO book_details(author, title, isbn, published_date, created_date, created_by)
 VALUES ('J.K Rowling', 'Harry Potter', '123123123', NOW(), NOW(), 1);
@@ -46,8 +46,8 @@ VALUES ('Java', 'Java is nice', 8, NOW(), 1);
 INSERT INTO programs(year, month, course_id, created_date, created_by)
 VALUES (2021, 07, 1, NOW(), 1);
 
-insert into attendances(program_id, user_id, state, created_date, created_by)
-values (1, 1, 'PRESENT', NOW(), 1);
+insert into attendances(user_id, state, created_date, created_by)
+values (1, 'PRESENT', NOW(), 1);
 
 INSERT INTO course_subjects(course_id, subject_id, created_date, created_by)
 VALUES (1, 1, NOW(), 1);

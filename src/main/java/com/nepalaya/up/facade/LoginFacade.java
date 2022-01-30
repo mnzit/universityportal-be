@@ -10,6 +10,7 @@ import com.nepalaya.up.util.JwtUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,10 +18,13 @@ public class LoginFacade {
 
     private final UserDetailsService userDetailsService;
     private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
 
-    public LoginFacade(UserDetailsService userDetailsService, JwtUtil jwtUtil) {
+
+    public LoginFacade(UserDetailsService userDetailsService, JwtUtil jwtUtil, PasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
         this.jwtUtil = jwtUtil;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Response login(LoginRequest request, AuthCallback authCallback) {
@@ -29,7 +33,7 @@ public class LoginFacade {
         String requestPassword = request.getPassword();
         String savedPassword = userDetails.getPassword();
 
-        if (requestPassword.equals(savedPassword)) {
+        if (passwordEncoder.matches(requestPassword,savedPassword)) {
             // Generating token
             String token = jwtUtil.generateToken(userDetails);
             // Setting token in header

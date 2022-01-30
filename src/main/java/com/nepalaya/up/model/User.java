@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 @Builder
 @Getter
 @Setter
@@ -32,7 +32,7 @@ public class User extends BaseEntity<User> implements UserDetails {
     @Column(length = 150, name = "LASTNAME", nullable = false)
     private String lastName;
 
-    @Column(name = "GENDER", columnDefinition = "enum('MALE','FEMALE')", nullable = false)
+    @Column(name = "GENDER", nullable = false)
     @Enumerated(EnumType.STRING)
     private GenderType genderType;
 

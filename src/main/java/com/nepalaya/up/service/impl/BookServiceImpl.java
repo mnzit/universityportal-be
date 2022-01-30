@@ -6,10 +6,7 @@ import com.nepalaya.up.dto.Response;
 import com.nepalaya.up.exception.DataNotFoundException;
 import com.nepalaya.up.exception.SystemException;
 import com.nepalaya.up.mapper.BookDetailMapper;
-import com.nepalaya.up.model.Book;
-import com.nepalaya.up.model.BookDetail;
-import com.nepalaya.up.model.BookHistory;
-import com.nepalaya.up.model.User;
+import com.nepalaya.up.model.*;
 import com.nepalaya.up.model.enums.BookState;
 import com.nepalaya.up.repository.BookDetailRepository;
 import com.nepalaya.up.repository.BookHistoryRepository;
@@ -24,20 +21,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class BookServiceImpl implements BookService {
 
-    private BookDetailRepository bookDetailRepository;
+    private final BookDetailRepository bookDetailRepository;
+    private final BookRepository bookRepository;
+    private final UserRepository userRepository;
+    private final BookHistoryRepository bookHistoryRepository;
 
-    private BookRepository bookRepository;
-    private UserRepository userRepository;
-    private BookHistoryRepository bookHistoryRepository;
-
-    public BookServiceImpl(BookDetailRepository bookDetailRepository, BookRepository bookRepository, UserRepository userRepository, BookHistoryRepository bookHistoryRepository) {
+    public BookServiceImpl(BookDetailRepository bookDetailRepository,
+                           BookRepository bookRepository,
+                           UserRepository userRepository,
+                           BookHistoryRepository bookHistoryRepository) {
         this.bookDetailRepository = bookDetailRepository;
         this.bookRepository = bookRepository;
         this.userRepository = userRepository;
@@ -52,122 +53,144 @@ public class BookServiceImpl implements BookService {
             bookDetailRepository.save(bookDetail);
             return ResponseBuilder.success("Book detail added successfully!");
         } catch (Exception ex) {
-            LogUtil.exception(ex.getMessage());
             throw new SystemException();
         }
     }
 
     @Override
-    public Response getBook(long bookDetailId) {
+    public Response getBook(Long bookDetailId) {
 
         try {
             BookDetailResponse bookDetailResponse = BookDetailMapper.mapBookDetail(bookDetailRepository
                     .findById(bookDetailId)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
-            return ResponseBuilder.success("book fetched successfully", bookDetailResponse);
+
+            return ResponseBuilder.success("Book detail fetched successfully", bookDetailResponse);
         } catch (Exception ex) {
-            LogUtil.exception(ex.getMessage());
             throw new SystemException();
         }
     }
 
     @Override
     public Response getAllBooks() {
-
         try {
-            List<BookDetailResponse> bookDetailResponses = bookDetailRepository.findAll()
-                    .stream()
-                    .map(BookDetailMapper::mapBookDetail)
-                    .collect(Collectors.toList());
+            List<BookDetail> bookDetail = bookDetailRepository.findAll();
+            if (bookDetail != null) {
+                List<BookDetailResponse> bookDetailResponses = bookDetail.stream()
+                        .map(BookDetailMapper::mapBookDetail)
+                        .collect(Collectors.toList());
+                return ResponseBuilder.success("Book details fetched successfully", bookDetailResponses);
+            } else {
+                return ResponseBuilder.failure("Book details not found");
+            }
 
-            return ResponseBuilder.success("books fetched successfully", bookDetailResponses);
         } catch (Exception ex) {
-            LogUtil.exception("error while fetching the books");
             throw new SystemException(ex.getMessage());
         }
     }
 
     @Override
-    public Response addCopy(long bookDetailId) {
-
+    public Response addCopy(Long bookDetailId) {
         try {
-            BookDetail bookDetail = new BookDetail();
-            bookDetail.setId(bookDetailId);
-
+            BookDetail bookDetail = bookDetailRepository.findById(bookDetailId).orElseThrow(() -> new DataNotFoundException("Book detail not found!"));
             Book book = new Book();
             book.setBookDetail(bookDetail);
             bookRepository.save(book);
-            return ResponseBuilder.success("book added successfully");
+            return ResponseBuilder.success("Book copy created successfully");
         } catch (Exception ex) {
-            LogUtil.exception("could not add copy");
             throw new SystemException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public Response updateCopy(Long bookId, BookState state) {
+        try {
+            Book book = bookRepository.findById(bookId).orElseThrow(() -> new DataNotFoundException("Book not found!"));
+            book.setState(state);
+            bookRepository.save(book);
+            return ResponseBuilder.success("Book updated successfully");
+        } catch (Exception ex) {
+            throw new SystemException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public Response returnBook(BookHistoryRequest request) {
+
+        try {
+            User user = userRepository
+                    .findByEmailAddress(request.getEmail())
+                    .orElseThrow(() -> new DataNotFoundException(String.format("User not found with email %s", request.getEmail())));
+
+            Book book = bookRepository
+                    .findById(request.getBookId())
+                    .filter(BaseEntity::getStatus)
+                    .orElseThrow(() -> new DataNotFoundException("Book not found!"));
+
+            if (book.getState().compareTo(BookState.TAKEN) == 0) {
+
+                book.setState(BookState.AVAILABLE);
+                bookRepository.save(book);
+
+                BookHistory history = bookHistoryRepository.findBorrowedBook(request.getBookId(), user);
+                history.setBookReturnedDate(new Date());
+                bookHistoryRepository.save(history);
+
+                return ResponseBuilder.success("Book returned successfully");
+            } else {
+                LogUtil.info("Book has not been borrowed yet!");
+                throw new DataNotFoundException("Book has not been borrowed yet!");
+            }
+        } catch (Exception exception) {
+            throw new SystemException(exception.getMessage());
         }
     }
 
     @Override
     public Response borrowBook(BookHistoryRequest request) {
-
         try {
-            User user = userRepository.findByEmailAddress(request.getEmail())
+
+            User user = userRepository
+                    .findByEmailAddress(request.getEmail())
                     .orElseThrow(() -> new DataNotFoundException(String.format("User not found with email %s", request.getEmail())));
 
-            BookDetail bookDetail = new BookDetail();
-            bookDetail.setId(request.getBookId());
+            Book book = bookRepository
+                    .findById(request.getBookId())
+                    .filter(BaseEntity::getStatus)
+                    .orElseThrow(() -> new DataNotFoundException("Book not found!"));
 
-            List<Book> books = bookRepository.getAvailableBooks(bookDetail);
+            if (book.getState().compareTo(BookState.AVAILABLE) == 0 || book.getState().compareTo(BookState.NEW) == 0) {
 
-            if (!books.isEmpty()) {
-                Book borrowBook = books.get(0);
-                borrowBook.setState(BookState.TAKEN);
-                borrowBook = bookRepository.save(borrowBook);
+                book.setState(BookState.TAKEN);
+                book = bookRepository.save(book);
 
                 BookHistory bookHistory = new BookHistory();
-                bookHistory.setBook(borrowBook);
+                bookHistory.setBook(book);
                 bookHistory.setUser(user);
                 bookHistory.setBookTakenDate(new Date());
                 bookHistoryRepository.save(bookHistory);
-                return ResponseBuilder.success("book borrowed successfully");
-            } else {
-                LogUtil.exception("there are no available books with given bookdetail id");
-                throw new DataNotFoundException("there are no available books in the system");
-            }
-        } catch (Exception exception) {
 
-            LogUtil.exception("couldnot borrow the book");
+                return ResponseBuilder.success("Book successfully borrowed!");
+            } else if (book.getState().compareTo(BookState.TAKEN) == 0) {
+                return ResponseBuilder.success("Book is already taken!");
+            } else {
+                return ResponseBuilder.success("Book cannot be borrowed!");
+            }
+
+        } catch (Exception exception) {
             throw new SystemException(exception.getMessage());
         }
     }
 
     @Override
-    public Response returnBook(BookHistoryRequest bookHistoryRequest) {
-
+    public Response deleteCopy(Long bookId) {
         try {
-            User user = userRepository.findByEmailAddress(bookHistoryRequest.getEmail())
-                    .orElseThrow(() -> new DataNotFoundException(String.format("User not found with email %s", bookHistoryRequest.getEmail())));
-
-            BookDetail bookDetail = new BookDetail();
-            bookDetail.setId(bookHistoryRequest.getBookId());
-
-            BookHistory history = bookHistoryRepository.findBorrowedBook(bookDetail, user);
-            if (history != null) {
-                history.setBookReturnedDate(new Date());
-                bookHistoryRepository.save(history);
-
-                Book book = history.getBook();
-                book.setState(BookState.AVAILABLE);
-                bookRepository.save(book);
-
-                return ResponseBuilder.success("your book has bee successfully returned");
-            } else {
-                LogUtil.exception("the user has not borrowed any book");
-                throw new DataNotFoundException("you have not borrowed any book");
-            }
+            Book book = bookRepository.findById(bookId).orElseThrow(() -> new DataNotFoundException("Book not found!"));
+            book.setStatus(false);
+            bookRepository.save(book);
+            return ResponseBuilder.success("Book deleted successfully");
         } catch (Exception exception) {
-            LogUtil.exception(exception.getMessage());
             throw new SystemException(exception.getMessage());
         }
-
     }
-
-
 }

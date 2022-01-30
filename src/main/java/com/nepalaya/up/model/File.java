@@ -17,7 +17,7 @@ public class File extends BaseEntity<User> {
     @Column(length = 200, name = "OBJECT_ID", nullable = false)
     private String objectId;
 
-    @Column(name = "TYPE", columnDefinition = "enum('ZIP','RAR', 'DOCX', 'DOC', 'PDF','PNG','JPG','JPEG','GIF','PPTX','PPT')", nullable = false)
+    @Column(name = "TYPE", nullable = false)
     @Enumerated(EnumType.STRING)
     private FileType type;
 
