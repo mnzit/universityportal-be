@@ -30,7 +30,7 @@ public class PingController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         try {
             String dateTime = dateFormat.format(startedDate);
-            model.addAttribute("startedDate", name  + dateTime);
+            model.addAttribute("startedDate", dateTime);
         } catch (Exception e) {
             LogUtil.exception(e);
         }
