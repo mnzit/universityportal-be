@@ -67,11 +67,13 @@ public class LoginFacade {
         } else {
             user.increaseWrongPasswordAttemptCount();
             userRepository.save(user);
-            emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", String.format("You have entered a wrong password. You have %s attempt left.", User.TOTAL_WRONG_ATTEMPT_COUNT - user.getWrongPasswordAttemptCount())));
+            String message = String.format("You have entered a wrong password. You have %s attempt left.", User.TOTAL_WRONG_ATTEMPT_COUNT - user.getWrongPasswordAttemptCount());
+            emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", message));
             if (!user.getStatus()) {
                 return ResponseBuilder.failure(ResponseMsgConstant.ACCOUNT_BLOCKED);
+            } else {
+                return ResponseBuilder.failure(message);
             }
-            return ResponseBuilder.failure(ResponseMsgConstant.LOGIN_FAILED);
         }
     }
 }
