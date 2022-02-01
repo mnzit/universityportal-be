@@ -8,6 +8,15 @@
     <title th:text="${name}"></title>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <style>
+        .remote {
+            margin-left: 40px;
+            background: none;
+            color: wheat;
+            padding: 5px;
+            width: 150px;
+            text-align: center;
+        }
+
         body {
             background: #ffbf00;
             font-family: sans-serif;
@@ -28,7 +37,7 @@
 
         h1 {
             top: 24px;
-            font-size: 24px;
+            font-size: 12px;
         }
 
         h2 {
@@ -369,9 +378,7 @@
 </head>
 <body>
 
-<h1><span th:text="${name}"></span> is Running!</h1>
-<h1 th:text="${startedDate}"></h1>
-<h1>Your IP address is <b><span th:text="${ip_address}"></span></b></h1>
+<h1><span th:text="${name}"></span> is running since <span th:text="${startedDate}"></span></h1>
 <section class="world">
     <div class="back one"></div>
     <div class="back two"></div>
@@ -396,6 +403,7 @@
     <div class="cloud two"></div>
     <div class="cloud three"></div>
     <div class="stick">
+        <div class="remote">Hello, Your IP address is <b><span th:text="${ip_address}"></span></b></div>
         <div class="head"></div>
         <div class="arm left">
             <div class="bottom"></div>

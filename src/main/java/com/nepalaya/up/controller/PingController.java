@@ -1,6 +1,7 @@
 package com.nepalaya.up.controller;
 
 import com.nepalaya.up.constant.ApiConstant;
+import com.nepalaya.up.util.LogUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,7 @@ public class PingController {
             String dateTime = dateFormat.format(startedDate);
             model.addAttribute("startedDate", name + " started at: " + dateTime);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtil.exception(e);
         }
         model.addAttribute("name", name);
         model.addAttribute("ip_address", request.getRemoteAddr());
