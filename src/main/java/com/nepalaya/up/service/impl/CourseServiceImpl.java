@@ -4,6 +4,7 @@ package com.nepalaya.up.service.impl;
 import com.nepalaya.up.builder.CourseBuilder;
 import com.nepalaya.up.builder.ResponseBuilder;
 import com.nepalaya.up.dto.Response;
+import com.nepalaya.up.exception.DataAlreadyExistsException;
 import com.nepalaya.up.exception.DataNotFoundException;
 import com.nepalaya.up.exception.SystemException;
 import com.nepalaya.up.mapper.CourseMapper;
@@ -31,11 +32,17 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Response saveCourse(CourseDetailRequest request) {
         try {
+            Integer countTitle = courseRepository.getTitleCount(request.getTitle());
+            System.out.println("count: "+countTitle);
+            if(countTitle > 0){
+                throw new DataAlreadyExistsException();
+            }
             Course course = CourseBuilder.buildCourse(request);
             courseRepository.save(course);
             return ResponseBuilder.success("Course added successfully!");
         } catch (Exception ex) {
             throw new SystemException();
+
         }
     }
 
@@ -43,12 +50,10 @@ public class CourseServiceImpl implements CourseService {
     public Response getCourse(Long courseId) {
         try {
             Course course = courseRepository
-                    .findById(courseId)
-                    .orElseThrow(() -> new DataNotFoundException("Course not found!"));
+                    .getCourseById(courseId);
+                   CourseResponse courseResponse = CourseMapper.mapCourse(course);
+                return ResponseBuilder.success("Course detail fetched successfully", courseResponse);
 
-            CourseResponse courseResponse = CourseMapper.mapCourse(course);
-
-            return ResponseBuilder.success("Course detail fetched successfully", courseResponse);
         } catch (Exception ex) {
             throw new SystemException();
         }
@@ -59,6 +64,7 @@ public class CourseServiceImpl implements CourseService {
         try {
             List<CourseResponse> courseResponses = courseRepository.findAll()
                     .stream()
+                    .filter(course -> course.getStatus().equals(true))
                     .map(CourseMapper::mapCourse)
                     .collect(Collectors.toList());
             return ResponseBuilder.success("Course details fetched successfully", courseResponses);
@@ -70,6 +76,12 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Response updateCourse(Long courseId,CourseDetailRequest request) {
         try {
+
+            Integer countTitle = courseRepository.getTitleCounts(request.getTitle());
+            System.out.println("count: "+countTitle);
+            if(countTitle > 0){
+                throw new DataAlreadyExistsException();
+            }
             Course course = courseRepository.findById(courseId).orElseThrow(() -> new DataNotFoundException("Course not found!"));
             Course updatedCourse = CourseBuilder.buildCourseUpdate(course,request);
             courseRepository.save(updatedCourse);
