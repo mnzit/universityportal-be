@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class EmailDto {
+public class EmailDTO {
 
     private String from;
     private String to;
@@ -16,7 +16,7 @@ public class EmailDto {
     private String subject;
     private Object data;
 
-    public EmailDto(String from, String to, String subject, Object data) {
+    public EmailDTO(String from, String to, String subject, Object data) {
         this.from = from;
         this.to = to;
         this.subject = subject;
