@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
@@ -23,9 +25,16 @@ public class PingController {
     }
 
     @GetMapping
-    public String ping(Model model) {
-        model.addAttribute("startedDate", "started at: " + startedDate);
+    public String ping(Model model, HttpServletRequest request) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        try {
+            String dateTime = dateFormat.format(startedDate);
+            model.addAttribute("startedDate", name + " started at: " + dateTime);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         model.addAttribute("name", name);
+        model.addAttribute("ip_address", request.getRemoteAddr());
         return "ping";
     }
 }

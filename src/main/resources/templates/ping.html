@@ -28,7 +28,7 @@
 
         h1 {
             top: 24px;
-            font-size: 12px;
+            font-size: 24px;
         }
 
         h2 {
@@ -47,12 +47,14 @@
             box-shadow: 0 16px 10px -10px #f0b400;
             transform: translate(-50%, -50%);
         }
+
         section.world div {
             position: absolute;
             box-sizing: border-box;
             background: #333333;
             border-radius: 2px;
         }
+
         section.world div::before, section.world div::after {
             content: "";
             position: absolute;
@@ -94,66 +96,81 @@
             height: 4px;
             bottom: 0;
         }
+
         .floor .rock {
             bottom: 0;
             right: -20px;
         }
+
         .floor .rock.one {
             width: 16px;
             height: 26px;
             animation: elem 3s linear infinite;
         }
+
         .floor .rock.two {
             width: 20px;
             height: 18px;
             animation: elem 3s linear infinite 0.4s;
         }
+
         .floor .rock.three {
             width: 13px;
             height: 26px;
             animation: elem 3s linear infinite 1.3s;
         }
+
         .floor .grass {
             width: 2px;
             bottom: 0;
             right: -2px;
         }
+
         .floor .grass.one {
             height: 15px;
             animation: elem 3s linear infinite;
         }
+
         .floor .grass.two {
             height: 10px;
             animation: elem 3.3s linear infinite 0.2s;
         }
+
         .floor .grass.three {
             height: 18px;
             animation: elem 2.5s linear infinite 0.4s;
         }
+
         .floor .grass.four {
             height: 5px;
             animation: elem 2.9s linear infinite 0.6s;
         }
+
         .floor .grass.five {
             height: 7px;
             animation: elem 3s linear infinite 0.8s;
         }
+
         .floor .grass.six {
             height: 10px;
             animation: elem 3.1s linear infinite 1s;
         }
+
         .floor .grass.seven {
             height: 4px;
             animation: elem 3s linear infinite 1.2s;
         }
+
         .floor .grass.height {
             height: 7px;
             animation: elem 3s linear infinite 1.4s;
         }
+
         .floor .grass.nine {
             height: 10px;
             animation: elem 3.1s linear infinite 1.6s;
         }
+
         .floor .grass.ten {
             height: 6px;
             animation: elem 3s linear infinite 1.8s;
@@ -164,15 +181,18 @@
             right: -160px;
             background: rgba(255, 255, 255, 0.3) !important;
         }
+
         .cloud::before, .cloud::after {
             background: rgba(255, 255, 255, 0.3) !important;
         }
+
         .cloud::before {
             width: 80%;
             height: 50%;
             bottom: -25%;
             left: -20%;
         }
+
         .cloud::after {
             width: 60%;
             height: 30%;
@@ -207,15 +227,19 @@
             border-radius: 3px;
             animation: stick 3s ease-in-out infinite;
         }
+
         .stick div {
             transform-origin: 50% 0%;
         }
+
         .stick .left {
             z-index: -1;
         }
+
         .stick .right {
             z-index: 1;
         }
+
         .stick .head {
             width: 12px;
             height: 12px;
@@ -223,23 +247,27 @@
             border-radius: 50%;
             transform: translate(-3px, -14px);
         }
+
         .stick .arm {
             width: 4px;
             height: 14px;
             top: 1px;
             left: 1px;
         }
+
         .stick .arm .bottom {
             width: 4px;
             height: 12px;
             bottom: -10px;
         }
+
         .stick .leg {
             width: 4px;
             height: 20px;
             bottom: -19px;
             left: 1px;
         }
+
         .stick .leg .bottom {
             width: 4px;
             height: 15px;
@@ -249,6 +277,7 @@
         .arm.left {
             animation: run 0.8s linear infinite;
         }
+
         .arm.left .bottom {
             animation: arm-bottom 0.4s linear infinite;
         }
@@ -256,6 +285,7 @@
         .arm.right {
             animation: run 0.8s linear infinite 0.4s;
         }
+
         .arm.right .bottom {
             animation: arm-bottom 0.4s linear infinite 0.4s;
         }
@@ -263,6 +293,7 @@
         .leg.left {
             animation: run 0.4s linear infinite;
         }
+
         .leg.left .bottom {
             animation: leg-bottom 0.4s linear infinite;
         }
@@ -270,6 +301,7 @@
         .leg.right {
             animation: run 0.4s linear infinite 0.2s;
         }
+
         .leg.right .bottom {
             animation: leg-bottom 0.4s linear infinite 0.2s;
         }
@@ -282,6 +314,7 @@
                 transform: translateX(-760px);
             }
         }
+
         @keyframes elem {
             0% {
                 transform: translateX(0);
@@ -290,6 +323,7 @@
                 transform: translateX(-640px);
             }
         }
+
         @keyframes stick {
             0%, 100% {
                 transform: translateX(0px);
@@ -301,6 +335,7 @@
                 transform: translateX(20px);
             }
         }
+
         @keyframes run {
             0%, 50%, 100% {
                 transform: rotate(0deg);
@@ -312,6 +347,7 @@
                 transform: rotate(-60deg);
             }
         }
+
         @keyframes arm-bottom {
             0%, 100% {
                 transform: rotate(0deg);
@@ -320,6 +356,7 @@
                 transform: rotate(-90deg);
             }
         }
+
         @keyframes leg-bottom {
             0%, 100% {
                 transform: rotate(0deg);
@@ -333,6 +370,8 @@
 <body>
 
 <h1><span th:text="${name}"></span> is Running!</h1>
+<h1 th:text="${startedDate}"></h1>
+<h1>Your IP address is <b><span th:text="${ip_address}"></span></b></h1>
 <section class="world">
     <div class="back one"></div>
     <div class="back two"></div>
