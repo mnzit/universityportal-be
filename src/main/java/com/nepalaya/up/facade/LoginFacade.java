@@ -38,9 +38,6 @@ public class LoginFacade {
     public Response login(LoginRequest request, AuthCallback authCallback) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmailAddress());
         User user = (User) userDetails;
-        if (!user.getStatus()) {
-            return ResponseBuilder.failure(ResponseMsgConstant.ACCOUNT_BLOCKED);
-        }
         String requestPassword = request.getPassword();
         String savedPassword = userDetails.getPassword();
 
@@ -68,10 +65,12 @@ public class LoginFacade {
             user.increaseWrongPasswordAttemptCount();
             userRepository.save(user);
             String message = String.format("You have entered a wrong password. You have %s attempt left.", User.TOTAL_WRONG_ATTEMPT_COUNT - user.getWrongPasswordAttemptCount());
-            emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", message));
+
             if (!user.getStatus()) {
+                emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", ResponseMsgConstant.ACCOUNT_BLOCKED));
                 return ResponseBuilder.failure(ResponseMsgConstant.ACCOUNT_BLOCKED);
             } else {
+                emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", message));
                 return ResponseBuilder.failure(message);
             }
         }
