@@ -3,6 +3,7 @@ package com.nepalaya.up.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nepalaya.up.model.enums.GenderType;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenerationTime;
@@ -22,6 +23,8 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@org.hibernate.annotations.Cache(region = "users", usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cacheable
 public class User extends BaseEntity<User> implements UserDetails {
 
     public static final Integer TOTAL_WRONG_ATTEMPT_COUNT = 3;

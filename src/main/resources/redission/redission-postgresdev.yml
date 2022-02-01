@@ -1,0 +1,3 @@
+singleServerConfig:
+  address: "redis://redis-10933.c14.us-east-1-2.ec2.cloud.redislabs.com:10933"
+  password: "rs6o1TFcYJg3ateJuXOriSURFm8rEZPJ"

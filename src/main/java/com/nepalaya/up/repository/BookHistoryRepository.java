@@ -5,20 +5,24 @@ import com.nepalaya.up.model.BookHistory;
 import com.nepalaya.up.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.QueryHint;
 import java.util.List;
 
 @Repository
 public interface BookHistoryRepository extends JpaRepository<BookHistory, Long> {
-
+    @QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })
     @Query("SELECT bh FROM BookHistory bh WHERE bh.id = :id")
     List<BookHistory> findBookHistoriesByBook(Long id);
 
+    @QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })
     @Query("SELECT bh FROM BookHistory bh WHERE bh.book.id = :bookId AND bh.user= :user AND bh.bookReturnedDate IS NULL")
     BookHistory findBorrowedBook(@Param("bookId") Long bookId, @Param("user") User user);
 
+    @QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })
     @Query("SELECT bh FROM BookHistory bh WHERE bh.book.id = :bookId AND bh.bookReturnedDate IS NULL")
     BookHistory findBorrowedBook(@Param("bookId") Long bookId);
 }

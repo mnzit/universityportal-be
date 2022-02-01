@@ -1,7 +1,9 @@
 package com.nepalaya.up.model;
 
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,6 +15,8 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@org.hibernate.annotations.Cache(region = "subjects", usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cacheable
 public class Subject extends BaseEntity<User> {
 
     @Column(length = 150, name = "TITLE", nullable = false)

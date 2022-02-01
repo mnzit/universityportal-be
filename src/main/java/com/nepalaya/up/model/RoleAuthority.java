@@ -2,6 +2,7 @@ package com.nepalaya.up.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
@@ -12,6 +13,8 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@org.hibernate.annotations.Cache(region = "role_authorities", usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cacheable
 public class RoleAuthority extends BaseEntity<User> {
 
     @JsonBackReference

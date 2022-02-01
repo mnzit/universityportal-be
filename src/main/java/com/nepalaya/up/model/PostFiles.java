@@ -2,11 +2,9 @@ package com.nepalaya.up.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "POSTS")
@@ -15,6 +13,8 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Cacheable
+@org.hibernate.annotations.Cache(region = "post_files", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class PostFiles extends BaseEntity<User> {
 
     @JsonBackReference

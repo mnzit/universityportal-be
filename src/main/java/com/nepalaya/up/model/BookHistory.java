@@ -1,6 +1,7 @@
 package com.nepalaya.up.model;
 
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,8 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@org.hibernate.annotations.Cache(region = "book_histories", usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cacheable
 public class BookHistory extends BaseEntity<User> {
 
     @OneToOne(fetch = FetchType.EAGER)

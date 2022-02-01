@@ -2,6 +2,7 @@ package com.nepalaya.up.model;
 
 import com.nepalaya.up.model.enums.BookState;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
@@ -13,6 +14,8 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@org.hibernate.annotations.Cache(region = "books", usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cacheable
 public class Book extends BaseEntity<User> {
 
     @ManyToOne(fetch = FetchType.EAGER)

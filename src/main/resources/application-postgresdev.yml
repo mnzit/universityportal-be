@@ -22,8 +22,15 @@ spring:
     hibernate:
       ddl-auto: update
     properties:
-      hibernate.format_sql: true
-
+      hibernate:
+        format_sql: true
+        cache:
+          use_query_cache: true
+          use_second_level_cache: true
+          factory_class: org.redisson.hibernate.RedissonRegionFactory
+          redisson:
+            fallback: true
+            config: redission/redission-postgresdev.yml
 jwt:
   expiresInMinute: 10
   secretKey: mbA7W_&3Gg'a'{.Z!@4724:%=rF.YjuA

@@ -2,6 +2,7 @@ package com.nepalaya.up.model;
 
 import com.nepalaya.up.model.enums.DurationType;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -15,6 +16,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@org.hibernate.annotations.Cache(region = "courses", usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cacheable
 public class Course extends BaseEntity<User> {
 
     @Column(length = 200, name = "TITLE", nullable = false)

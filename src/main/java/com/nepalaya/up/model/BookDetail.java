@@ -2,6 +2,7 @@ package com.nepalaya.up.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -16,6 +17,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@org.hibernate.annotations.Cache(region = "book_details", usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cacheable
 public class BookDetail extends BaseEntity<User> {
 
     @Column(length = 100, name = "TITLE", nullable = false)
