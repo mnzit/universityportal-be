@@ -8,19 +8,18 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
+    @Override
     @Query("SELECT s FROM Course s WHERE s.id = :courseId AND s.status = true")
-    Course getCourseById(@Param("courseId") Long courseId);
+    Optional<Course> findById(@Param("courseId") Long courseId);
 
     @Query("SELECT s FROM Course s WHERE s.status = true")
     List<Course> findAllCourses();
 
     @Query("SELECT count(s.id) FROM Course s WHERE s.title = :title AND s.status = true")
-    Integer getTitleCount(String title);
-
-    @Query("SELECT count(s.id) FROM Course s WHERE s.title = :title AND s.status = true")
-    Integer getTitleCounts(String title);
+    Integer findCourseCountByTitle(@Param("title") String title);
 }
