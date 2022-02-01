@@ -17,6 +17,7 @@ public class AuthController {
 
     private final LoginFacade loginFacade;
 
+
     public AuthController(LoginFacade loginFacade) {
         this.loginFacade = loginFacade;
     }
@@ -25,6 +26,7 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@RequestBody @Valid LoginRequest request) {
         ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok();
         Response response = loginFacade.login(request, responseBuilder::headers);
+
         return responseBuilder.body(response);
     }
 }

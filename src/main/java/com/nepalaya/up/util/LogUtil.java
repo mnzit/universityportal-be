@@ -18,4 +18,8 @@ public class LogUtil {
         log.info("[Info]: " + message);
     }
 
+    public static void info(String message, Object...args) {
+        log.info("[Info]: " + message, args);
+    }
+
 }

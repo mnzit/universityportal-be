@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .findByEmailAddress(email)
                 .orElseThrow(() -> new UsernameNotFoundException(ResponseMsgConstant.LOGIN_FAILED));
         if (!user.getStatus()) {
-            throw new UsernameNotFoundException(ResponseMsgConstant.LOGIN_FAILED);
+            throw new UsernameNotFoundException(ResponseMsgConstant.ACCOUNT_BLOCKED);
         }
         return user;
     }

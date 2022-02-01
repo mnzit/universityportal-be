@@ -5,6 +5,7 @@ import com.nepalaya.up.model.enums.GenderType;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.GenerationTime;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,8 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends BaseEntity<User> implements UserDetails {
+
+    public static final Integer TOTAL_WRONG_ATTEMPT_COUNT = 3;
 
     @Column(length = 150, name = "FIRSTNAME", nullable = false)
     private String firstName;
@@ -50,6 +53,11 @@ public class User extends BaseEntity<User> implements UserDetails {
     @JsonIgnore
     @Column(length = 150, name = "PASSWORD", nullable = false)
     private String password;
+
+    @JsonIgnore
+    @org.hibernate.annotations.Generated(GenerationTime.INSERT)
+    @Column(length = 150, name = "WRONG_PASSWORD_ATTEMPT_COUNT", columnDefinition = "INTEGER DEFAULT 0")
+    private Integer wrongPasswordAttemptCount;
 
     @JsonIgnore
     @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")
@@ -94,22 +102,34 @@ public class User extends BaseEntity<User> implements UserDetails {
                 .collect(Collectors.toList());
     }
 
+    public void increaseWrongPasswordAttemptCount() {
+        this.wrongPasswordAttemptCount = this.wrongPasswordAttemptCount + 1;
+        // Blocking user
+        if (TOTAL_WRONG_ATTEMPT_COUNT.compareTo(this.wrongPasswordAttemptCount) == 0) {
+            this.status = false;
+        }
+    }
+
+    public void resetWrongPasswordAttemptCount() {
+        this.wrongPasswordAttemptCount = 0;
+    }
+
     @Override
     public boolean isEnabled() {
         return getStatus();
     }
 
-    public String getFullName(){
+    public String getFullName() {
         StringBuilder fullName = new StringBuilder();
-        if(firstName != null){
+        if (firstName != null) {
             fullName.append(firstName);
             fullName.append(" ");
         }
-        if(middleName != null){
+        if (middleName != null) {
             fullName.append(middleName);
             fullName.append(" ");
         }
-        if(lastName != null){
+        if (lastName != null) {
             fullName.append(lastName);
         }
         return fullName.toString();
