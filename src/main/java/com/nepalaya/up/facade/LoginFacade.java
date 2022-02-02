@@ -6,6 +6,7 @@ import com.nepalaya.up.constant.ResponseMsgConstant;
 import com.nepalaya.up.constant.SecurityConstant;
 import com.nepalaya.up.dto.Response;
 import com.nepalaya.up.email.dto.EmailDTO;
+import com.nepalaya.up.email.factory.MailType;
 import com.nepalaya.up.email.producer.EmailEventProducer;
 import com.nepalaya.up.model.User;
 import com.nepalaya.up.repository.UserRepository;
@@ -72,11 +73,11 @@ public class LoginFacade {
             map.put("template", "wrongpassword");
             if (!user.getStatus()) {
                 map.put("message", ResponseMsgConstant.ACCOUNT_BLOCKED);
-                emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", true, map));
+                emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", map), MailType.MIME_THYMELEAF);
                 return ResponseBuilder.failure(ResponseMsgConstant.ACCOUNT_BLOCKED);
             } else {
                 map.put("message", message);
-                emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", true, map));
+                emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", map), MailType.MIME_THYMELEAF);
                 return ResponseBuilder.failure(message);
             }
         }

@@ -1,6 +1,5 @@
 package com.nepalaya.up.email.listener;
 
-import com.nepalaya.up.email.dto.EmailDTO;
 import com.nepalaya.up.email.event.EmailEvent;
 import com.nepalaya.up.email.service.EmailService;
 import com.nepalaya.up.util.LogUtil;
@@ -21,8 +20,8 @@ public class EmailEventListener {
 
     @Async("emailThreadPool")
     @EventListener
-    public void handleContextStart(EmailEvent emailEvent) {
+    public void handleContextStart(EmailEvent.EmailWrapper emailWrapper) {
         LogUtil.info("Email event received");
-        emailService.send((EmailDTO) emailEvent.getSource());
+        emailService.send(emailWrapper.getEmailDTO(), emailWrapper.getMailType());
     }
 }
