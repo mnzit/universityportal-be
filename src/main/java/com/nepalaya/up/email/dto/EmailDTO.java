@@ -32,10 +32,10 @@ public class EmailDTO implements Serializable {
         this.data = data;
     }
 
-    public EmailDTO(String from, String to, Boolean isMime, Object data) {
-        this.from = from;
+    public EmailDTO(String to, String subject, Boolean isMime, Object data) {
         this.to = to;
         this.isMime = isMime;
+        this.subject = subject;
         this.data = data;
     }
 }

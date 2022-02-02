@@ -17,6 +17,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Component
 public class LoginFacade {
 
@@ -65,12 +68,15 @@ public class LoginFacade {
             user.increaseWrongPasswordAttemptCount();
             userRepository.save(user);
             String message = String.format("You have entered a wrong password. You have %s attempt left.", User.TOTAL_WRONG_ATTEMPT_COUNT - user.getWrongPasswordAttemptCount());
-
+            Map<String, Object> map = new HashMap<>();
+            map.put("template", "wrongpassword");
             if (!user.getStatus()) {
-                emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", ResponseMsgConstant.ACCOUNT_BLOCKED));
+                map.put("message", ResponseMsgConstant.ACCOUNT_BLOCKED);
+                emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", true, map));
                 return ResponseBuilder.failure(ResponseMsgConstant.ACCOUNT_BLOCKED);
             } else {
-                emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", message));
+                map.put("message", message);
+                emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", true, map));
                 return ResponseBuilder.failure(message);
             }
         }
