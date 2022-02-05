@@ -5,6 +5,9 @@ public interface ApiConstant {
     String PING = "/";
     String LOGIN = "/login";
     String FAVICON = "/favicon.ico";
+    String SUBMIT_ATTENDANCE = "/submitAttendance";
+    String RESET_LINK = "/sendResetLink";
+    String RESET_PASSWORD = "/resetPassword";
     String PROFILE = "/profile";
     String USERS = "/users";
     String SEARCH = "/search";

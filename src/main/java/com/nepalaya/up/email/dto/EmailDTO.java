@@ -38,4 +38,8 @@ public class EmailDTO implements Serializable {
         this.subject = subject;
         this.data = data;
     }
+
+    public EmailDTO() {
+
+    }
 }

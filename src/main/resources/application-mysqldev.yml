@@ -27,3 +27,4 @@ spring:
 jwt:
   expiresInMinute: 10
   secretKey: mbA7W_&3Gg'a'{.Z!@4724:%=rF.YjuA
+

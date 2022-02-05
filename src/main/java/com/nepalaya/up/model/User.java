@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +54,12 @@ public class User extends BaseEntity<User> implements UserDetails {
     @JsonIgnore
     @Column(length = 150, name = "PASSWORD", nullable = false)
     private String password;
+
+    @Column(length = 150, name = "RESET_TOKEN")
+    private String resetToken;
+
+    @Column(name = "RESET_PASSWORD_TOKEN_EXPIRY")
+    private Date resetPasswordTokenExpiry;
 
     @JsonIgnore
     @org.hibernate.annotations.Generated(GenerationTime.INSERT)
