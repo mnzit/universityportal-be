@@ -31,5 +31,4 @@ public class ExecutionTimeAspect {
         LogUtil.info("Time taken in millis: {}", stopWatch.getTotalTimeMillis());
         return object;
     }
-
 }
