@@ -8,7 +8,8 @@ VALUES ('SUPER_ADMIN', NOW()),
 
 INSERT INTO users(firstname, middlename, lastname, gender, address, contact_no, email_address, password, role_id,
                   created_by, created_date)
-VALUES ('Manjit', NULL, 'Shakya', 'MALE', 'KTM', '9808546851', 'mnzitshakya@gmail.com', '$2a$10$ce7eMkNvFkn9NbZL7yRVX.wjCfF4Aa75D5TLgfo.U5ixw806HFwXq', 1, null, NOW()),
+VALUES ('System', NULL, 'System', 'MALE', 'KTM', '9800000000', 'universityportal123@gmail.com', '$2a$10$ce7eMkNvFkn9NbZL7yRVX.wjCfF4Aa75D5TLgfo.U5ixw806HFwXq', 1, null, NOW()),
+       ('Manjit', NULL, 'Shakya', 'MALE', 'KTM', '9808546851', 'mnzitshakya@gmail.com', '$2a$10$ce7eMkNvFkn9NbZL7yRVX.wjCfF4Aa75D5TLgfo.U5ixw806HFwXq', 1, null, NOW()),
        ('Anita', NULL, 'Joshi', 'FEMALE', 'KTM', '9808546852', 'joshianita358@gmail.com', '$2a$10$ce7eMkNvFkn9NbZL7yRVX.wjCfF4Aa75D5TLgfo.U5ixw806HFwXq', 1, 1, NOW()),
        ('Nawaraj', NULL, 'Shrestha', 'MALE', 'KTM', '9808546853', 'nawarajshrestha92@gmail.com', '$2a$10$ce7eMkNvFkn9NbZL7yRVX.wjCfF4Aa75D5TLgfo.U5ixw806HFwXq', 1, 1, NOW()),
        ('Sapana', NULL, 'Rimal', 'FEMALE', 'KTM', '9808546854', 'rimalsapanaaa55@gmail.com', '$2a$10$ce7eMkNvFkn9NbZL7yRVX.wjCfF4Aa75D5TLgfo.U5ixw806HFwXq', 1, 1, NOW()),

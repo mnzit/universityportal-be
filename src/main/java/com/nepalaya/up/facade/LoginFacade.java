@@ -40,6 +40,7 @@ public class LoginFacade {
     }
 
     public Response login(LoginRequest request, AuthCallback authCallback) {
+
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmailAddress());
         User user = (User) userDetails;
         String requestPassword = request.getPassword();
@@ -72,12 +73,10 @@ public class LoginFacade {
             Map<String, Object> map = new HashMap<>();
             map.put("template", "wrongpassword");
             if (!user.getStatus()) {
-                map.put("message", ResponseMsgConstant.ACCOUNT_BLOCKED);
+                map.put("message", "University Portal will automatically block the users who fails attempts login with wrong password.");
                 emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", map), MailType.MIME_THYMELEAF);
                 return ResponseBuilder.failure(ResponseMsgConstant.ACCOUNT_BLOCKED);
             } else {
-                map.put("message", message);
-                emailEventProducer.sendEmail(new EmailDTO(request.getEmailAddress(), "Wrong Password", map), MailType.MIME_THYMELEAF);
                 return ResponseBuilder.failure(message);
             }
         }

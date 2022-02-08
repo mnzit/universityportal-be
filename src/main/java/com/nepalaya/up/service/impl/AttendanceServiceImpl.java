@@ -38,7 +38,6 @@ public class AttendanceServiceImpl implements AttendanceService {
         }
         catch(Exception e){
             throw new SystemException();
-
         }
     }
 }

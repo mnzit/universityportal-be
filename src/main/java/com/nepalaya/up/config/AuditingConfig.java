@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 
@@ -21,7 +24,14 @@ public class AuditingConfig {
 
     @Bean
     public AuditorAware<User> auditorAware() {
-        // Lookup User instance corresponding to logged in user
-        return () -> Optional.ofNullable(userRepository.getById(1L));
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+
+        if(authentication == null || !authentication.isAuthenticated()){
+            // Fix for schedulers case as schedulers don't have any session
+            return () -> Optional.of(userRepository.getById(1L));
+        }
+        // Logged in user session
+        return () -> Optional.of((User) authentication.getPrincipal());
     }
 }

@@ -18,9 +18,9 @@ public class MailMessageFactory {
     public AbstractMailMessage get(MailType mailType){
         switch (mailType){
             case MIME_THYMELEAF:
-                return simpleMail;
-            case SIMPLE:
                 return mimeMail;
+            case SIMPLE:
+                return simpleMail;
             default:
                 throw new RuntimeException("Mail type missing");
         }
