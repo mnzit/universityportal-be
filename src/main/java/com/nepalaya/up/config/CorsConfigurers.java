@@ -18,8 +18,8 @@ public class CorsConfigurers {
                         .addMapping("/**")
                         .allowedOrigins("*")
                         .allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH")
-                        .allowCredentials(false)
-                        .allowedHeaders("Authorization", "Cache-Control", "Content-Type");
+                        .allowedHeaders("Authorization", "Cache-Control", "Content-Type")
+                        .exposedHeaders("Authorization");
             }
         };
     }
