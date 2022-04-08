@@ -16,7 +16,7 @@ public class CorsConfigurers {
             public void addCorsMappings(CorsRegistry registry) {
                 registry
                         .addMapping("/**")
-                        .allowedOrigins("*")
+                        .allowedOrigins("http://127.0.0.1:5500")
                         .allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH")
                         .allowCredentials(true)
                         .allowedHeaders("Authorization", "Cache-Control", "Content-Type");
