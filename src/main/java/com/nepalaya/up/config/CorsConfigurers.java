@@ -1,5 +1,5 @@
 
-.package com.nepalaya.up.config;
+package com.nepalaya.up.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
