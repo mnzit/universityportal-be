@@ -18,7 +18,6 @@ public class UpdateUserRequest implements Serializable {
     @NotEmpty
     private String firstName;
 
-    @NotEmpty
     private String middleName;
 
     @NotEmpty
