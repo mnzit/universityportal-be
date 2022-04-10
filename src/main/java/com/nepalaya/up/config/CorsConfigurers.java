@@ -16,7 +16,7 @@ public class CorsConfigurers {
             public void addCorsMappings(CorsRegistry registry) {
                 registry
                         .addMapping("/**")
-                        .allowedOrigins("http://127.0.0.1:5500/")
+                        .allowedOrigins("http://127.0.0.1:5500/", "https://mnzit.github.io")
                         .allowCredentials(true)
                         .allowedHeaders("Authorization", "Cache-Control", "Content-Type")
                         .exposedHeaders("Authorization");
