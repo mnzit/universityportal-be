@@ -4,6 +4,7 @@ import com.nepalaya.up.model.Role;
 import com.nepalaya.up.model.User;
 import com.nepalaya.up.model.enums.GenderType;
 import com.nepalaya.up.request.CreateUserRequest;
+import com.nepalaya.up.request.UpdateUserRequest;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
@@ -43,4 +44,18 @@ public class UserBuilder {
         user.setRole(new Role(request.getRoleId()));
         return user;
     }
+
+    public User buildForUpdate(UpdateUserRequest request, User user) {
+        user.setId(request.getId());
+        user.setFirstName(request.getFirstName());
+        user.setMiddleName(request.getMiddleName());
+        user.setLastName(request.getLastName());
+        user.setAddress(request.getAddress());
+        user.setEmailAddress(request.getEmailAddress());
+        user.setContactNo(request.getContactNo());
+        user.setGenderType(GenderType.valueOf(request.getGenderType()));
+        user.setRole(new Role(request.getRoleId()));
+        return user;
+    }
+
 }

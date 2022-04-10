@@ -3,12 +3,14 @@ package com.nepalaya.up.service.impl;
 import com.nepalaya.up.builder.ResponseBuilder;
 import com.nepalaya.up.builder.UserBuilder;
 import com.nepalaya.up.dto.Response;
-import com.nepalaya.up.exception.SystemException;
 import com.nepalaya.up.exception.DataNotFoundException;
+import com.nepalaya.up.exception.SystemException;
 import com.nepalaya.up.mapper.UserMapper;
 import com.nepalaya.up.model.User;
 import com.nepalaya.up.repository.UserRepository;
 import com.nepalaya.up.request.CreateUserRequest;
+import com.nepalaya.up.request.UpdateUserRequest;
+import com.nepalaya.up.response.UserListResponse;
 import com.nepalaya.up.response.UserResponse;
 import com.nepalaya.up.service.UserService;
 import com.nepalaya.up.util.LogUtil;
@@ -18,6 +20,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
+import static com.nepalaya.up.constant.ExceptionConstant.DATA_NOT_FOUND;
+import static com.nepalaya.up.constant.ExceptionConstant.SYSTEM_EXCEPTION;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -48,7 +53,7 @@ public class UserServiceImpl implements UserService {
     public Response getAll() {
         try {
             List<User> users = userRepository.findAll();
-            List<UserResponse> data = UserMapper.mapUsers(users);
+            List<UserListResponse> data = UserMapper.mapUsers(users);
             if (!data.isEmpty()) {
                 return ResponseBuilder.success("Users fetched Successfully", data);
             }
@@ -59,11 +64,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+
     @Override
     public Response currentUser() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            UserResponse data = UserMapper.mapUser((User) authentication.getPrincipal());
+            UserListResponse data = UserMapper.mapUserList((User) authentication.getPrincipal());
             return ResponseBuilder.success("User fetched Successfully", data);
         } catch (Exception exception) {
             LogUtil.exception("Failed while fetching User");
@@ -77,10 +83,55 @@ public class UserServiceImpl implements UserService {
             User user = userRepository
                     .findByEmailAddress(email)
                     .orElseThrow(() -> new DataNotFoundException(String.format("User not found with email %s", email)));
-            UserResponse data = UserMapper.mapUser(user);
+            UserListResponse data = UserMapper.mapUserList(user);
             return ResponseBuilder.success("User fetched Successfully", data);
         } catch (Exception exception) {
             LogUtil.exception("Failed while fetching User");
+            throw new SystemException();
+        }
+    }
+
+
+    @Override
+    public Response deleteUser(Long id) {
+        try {
+            User user = userRepository
+                    .findById(id)
+                    .orElseThrow(DATA_NOT_FOUND.apply("User not found"));
+            user.setStatus(false);
+            userRepository.save(user);
+            return ResponseBuilder.success("User Deleted Successfully");
+        } catch (Exception ex) {
+            throw SYSTEM_EXCEPTION.apply(null).get();
+        }
+    }
+
+    @Override
+    public Response getById(Long id) {
+        try {
+            User user = userRepository
+                    .findById(id)
+                    .orElseThrow(DATA_NOT_FOUND.apply("User not found"));
+            UserResponse response = UserMapper.mapUser(user);
+            return ResponseBuilder.success("User Fetched Successfully", response);
+        } catch (Exception ex) {
+            throw SYSTEM_EXCEPTION.apply(null).get();
+        }
+    }
+
+    @Override
+    @Transactional
+    public Response update(UpdateUserRequest request) {
+        try {
+            User user = userRepository
+                    .findById(request.getId())
+                    .orElseThrow(DATA_NOT_FOUND.apply("User not found"));
+
+            user = userBuilder.buildForUpdate(request, user);
+            userRepository.save(user);
+            return ResponseBuilder.success("User updated Successfully");
+        } catch (Exception exception) {
+            LogUtil.exception("Failed while updating User");
             throw new SystemException();
         }
     }

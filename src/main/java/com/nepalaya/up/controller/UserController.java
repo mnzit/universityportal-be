@@ -4,6 +4,7 @@ import com.nepalaya.up.constant.ApiConstant;
 import com.nepalaya.up.constant.RoleAuthorityConstant;
 import com.nepalaya.up.dto.Response;
 import com.nepalaya.up.request.CreateUserRequest;
+import com.nepalaya.up.request.UpdateUserRequest;
 import com.nepalaya.up.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -42,4 +43,20 @@ public class UserController {
     public Response findUserByEmail(@RequestParam String email) {
         return userService.getUser(email);
     }
+
+    @DeleteMapping(ApiConstant.WRAPPED_ID)
+    public Response deleteCourse(@PathVariable(ApiConstant.ID) Long userId) {
+        return userService.deleteUser(userId);
+    }
+
+    @GetMapping(ApiConstant.WRAPPED_ID)
+    public Response getUser(@PathVariable(ApiConstant.ID) Long userId) {
+        return userService.getById(userId);
+    }
+    @PutMapping
+    public Response update(@RequestBody @Valid UpdateUserRequest request) {
+        return userService.update(request);
+    }
+
+
 }

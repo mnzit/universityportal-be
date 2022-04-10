@@ -19,6 +19,7 @@ public class CorsConfigurers {
                         .allowedOrigins("http://127.0.0.1:5500/", "https://mnzit.github.io")
                         .allowCredentials(true)
                         .allowedHeaders("Authorization", "Cache-Control", "Content-Type")
+                        .allowedMethods("GET","POST","PUT","DELETE")
                         .exposedHeaders("Authorization");
             }
         };

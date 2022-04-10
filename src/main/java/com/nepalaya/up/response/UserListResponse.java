@@ -4,10 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
-public class UserResponse implements Serializable {
+public class UserListResponse implements Serializable {
     private Long id;
     private String firstName;
     private String middleName;
@@ -16,5 +17,7 @@ public class UserResponse implements Serializable {
     private String address;
     private String contactNo;
     private String emailAddress;
-    private Long roleId;
+    private String password;
+    private String role;
+    private List<String> authorities;
 }
