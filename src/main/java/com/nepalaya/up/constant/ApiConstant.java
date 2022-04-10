@@ -9,6 +9,7 @@ public interface ApiConstant {
     String FORGOT_PASSWORD = "/forgotPassword";
     String PROFILE = "/profile";
     String USERS = "/users";
+    String ROLES = "/roles";
     String SEARCH = "/search";
     String USER_EMAIL = "userEmail";
     String USER_BY_EMAIL = "/" + "{" + USER_EMAIL + "}";

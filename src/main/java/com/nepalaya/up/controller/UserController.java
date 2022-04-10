@@ -27,7 +27,6 @@ public class UserController {
     }
 
     @PostMapping
-    @PreAuthorize(RoleAuthorityConstant.CREATE_USER)
     public Response create(@RequestBody @Valid CreateUserRequest request) {
         return userService.save(request);
     }
