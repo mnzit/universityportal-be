@@ -1,6 +1,6 @@
 # [UniversityPortal](https://api-universityportal.herokuapp.com/)
 [![Java CI with Maven](https://github.com/mnzit/UniversityPortal/actions/workflows/maven.yml/badge.svg?event=push)](https://github.com/mnzit/UniversityPortal/actions/workflows/maven.yml)
-
+s
 ## Prerequisite
 * Core Java
 * Spring Core
