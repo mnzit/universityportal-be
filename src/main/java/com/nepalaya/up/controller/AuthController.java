@@ -6,6 +6,7 @@ import com.nepalaya.up.constant.ApiConstant;
 import com.nepalaya.up.dto.Response;
 import com.nepalaya.up.facade.LoginFacade;
 import com.nepalaya.up.request.LoginRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,7 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@RequestBody @Valid LoginRequest request) {
         ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok();
         Response response = loginFacade.login(request, responseBuilder::headers);
+        if(!response.getSuccess()) responseBuilder = ResponseEntity.status(HttpStatus.UNAUTHORIZED);
 
         return responseBuilder.body(response);
     }
